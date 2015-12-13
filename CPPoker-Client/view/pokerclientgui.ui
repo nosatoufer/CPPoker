@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PokerClientGui</class>
+ <widget class="QMainWindow" name="PokerClientGui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>100</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Poker - Texas Hold'em</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/img/logoPoker.png</normaloff>:/img/logoPoker.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPartie">
+    <property name="title">
+     <string>Partie</string>
+    </property>
+    <addaction name="actionConnexion"/>
+    <addaction name="actionNouveauSalon"/>
+    <addaction name="separator"/>
+    <addaction name="actionDeconnexion"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter"/>
+    <addaction name="separator"/>
+    <addaction name="actionApropos"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionRegles"/>
+    <addaction name="actionCombinaisons"/>
+   </widget>
+   <addaction name="menuPartie"/>
+   <addaction name="menuAide"/>
+  </widget>
+  <action name="actionConnexion">
+   <property name="text">
+    <string>Connexion</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="actionDeconnexion">
+   <property name="text">
+    <string>Se déconnecter</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionApropos">
+   <property name="text">
+    <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionRegles">
+   <property name="text">
+    <string>Règles</string>
+   </property>
+  </action>
+  <action name="actionCombinaisons">
+   <property name="text">
+    <string>Combinaisons</string>
+   </property>
+  </action>
+  <action name="actionNouveauSalon">
+   <property name="text">
+    <string>Nouveau salon</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\menuconnexion.o
+./release\pokerclientgui.o
+./release\pokerwidget.o
+./release\playerwidget.o
+./release\clientsock.o
+./release\qrc_images.o
+./release\moc_menuconnexion.o
+./release\moc_pokerclientgui.o
+./release\moc_clientsock.o
+);
