@@ -1,5 +1,3 @@
-#include <QPixmap>
-
 #include "pokerwidget.h"
 
 /**
@@ -37,15 +35,14 @@ PokerWidget::PokerWidget() : QWidget()
     this->addCard(":/img/cards/2_of_clubs.png");
     this->addCard(":/img/cards/2_of_clubs.png");
     this->addCard(":/img/cards/2_of_clubs.png");
+    this->addCard(":/img/cards/2_of_clubs.png");
 
-
-    //playerWidget.push_back(new PlayerWidget(this));
-
-    /*for (int i = 0; i < 6; i++) {
-        this->playerWidget[i] = new PlayerWidget(this);
-        this->cards[i]->resize(68,100);
-        this->cards[i]->setPixmap(imgCard.scaled(68,100,Qt::KeepAspectRatio));
-    }*/
+    this->addPlayer("joueur1");
+    this->addPlayer("joueur2");
+    this->addPlayer("joueur3");
+    this->addPlayer("joueur4");
+    this->addPlayer("joueur5");
+    this->addPlayer("joueur6");
 }
 
 /**
@@ -57,9 +54,7 @@ PokerWidget::~PokerWidget(){
     delete this->buttonCall;
     delete this->buttonRaise;
     this->deleteAllCards();
-    /*for (int i = 0; i < 6; i++) {
-        delete this->playerWidget[i];
-    }*/
+    this->deleteAllPlayers();
 }
 
 /**
@@ -98,9 +93,13 @@ QPushButton * PokerWidget::getButtonFold()
     return this->buttonFold;
 }
 
+/**
+ * @brief PokerWidget::addCard Méthode permettant d'ajouter une carte dans le widget
+ * @param pathCardFile Chemin de l'image de la carte
+ */
 void PokerWidget::addCard(string pathCardFile)
 {
-    if (this->cards.size() >= 5) return;
+    if ((int)this->cards.size() >= this->NB_MAX_CARDS) return;
     QPixmap imgCard(QString::fromStdString(pathCardFile));
     int index = this->cards.size();
     this->cards.push_back(new QLabel(this));
@@ -125,6 +124,9 @@ void PokerWidget::addCard(string pathCardFile)
     }
 }
 
+/**
+ * @brief PokerWidget::deleteAllCards Méthode permettant de supprimer toutes les cartes du widget
+ */
 void PokerWidget::deleteAllCards()
 {
     for (int i = 0; i < (int)this->cards.size(); i++)
@@ -133,4 +135,48 @@ void PokerWidget::deleteAllCards()
         this->cards[i] = nullptr;
     }
     this->cards.clear();
+}
+
+/**
+ * @brief PokerWidget::addPlayer Méthode permettant d'ajouter un nouveau joueur dans le widget
+ * @param namePlayer Nom du joueur
+ */
+void PokerWidget::addPlayer(string namePlayer)
+{
+    if ((int)this->playerWidget.size() >= this->NB_MAX_PLAYER) return;
+    int index = this->playerWidget.size();
+    this->playerWidget.push_back(new PlayerWidget(this, namePlayer));
+    switch (index) {
+        case 0:
+            this->playerWidget[index]->move(50, 70);
+            break;
+        case 1:
+            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 20);
+            break;
+        case 2:
+            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 70);
+            break;
+        case 3:
+            this->playerWidget[index]->move(50, 350);
+            break;
+        case 4:
+            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 400);
+            break;
+        case 5:
+            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 350);
+            break;
+    }
+}
+
+/**
+ * @brief PokerWidget::deleteAllPlayers Méthode permettant de supprimer tous les joueurs du widget
+ */
+void PokerWidget::deleteAllPlayers()
+{
+    for (int i = 0; i < (int)this->playerWidget.size(); i++)
+    {
+        delete this->playerWidget[i];
+        this->playerWidget[i] = nullptr;
+    }
+    this->playerWidget.clear();
 }

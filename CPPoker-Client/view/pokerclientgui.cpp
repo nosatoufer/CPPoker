@@ -2,8 +2,6 @@
 #include "ui_pokerclientgui.h"
 #include "menuconnexion.h"
 
-#include <QMessageBox>
-
 /**
  * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
  * @param parent

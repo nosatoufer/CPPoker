@@ -2,7 +2,7 @@
 #define POKERCLIENTGUI_H
 
 #include <QMainWindow>
-
+#include <QMessageBox>
 #include "pokerwidget.h"
 
 namespace Ui {
