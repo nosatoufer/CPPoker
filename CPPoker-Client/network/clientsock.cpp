@@ -1,4 +1,4 @@
-/*#include "clientsock.h"
+#include "clientsock.h"
 
 clientSock::clientSock(QObject *parent) :
     QObject(parent)
@@ -8,7 +8,6 @@ clientSock::clientSock(QObject *parent) :
     connect(m_sock, SIGNAL(readyRead()), this, SLOT(read()));
 
     m_sock->connectToHost("127.0.0.1",  1234);
-
 }
 
 void clientSock::connected()
@@ -22,4 +21,10 @@ void clientSock::read()
     qDebug() << m_sock->readAll();
 }
 
-*/
+void clientSock::askNickname(QString nickname)
+{
+    Request req = Request();
+    req.setCommand(LOGIN);
+    req.set("nickname",nickname.toStdString());
+    //m_sock->write(req.toString());
+}

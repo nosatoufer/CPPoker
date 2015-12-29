@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +20,9 @@ SOURCES += \
     view/pokerclientgui.cpp \
     view/pokerwidget.cpp \
     view/playerwidget.cpp \
-    network/clientsock.cpp
+    network/clientsock.cpp \
+    network/request.cpp \
+    network/utils.cpp
 
 FORMS += \
     view/menuconnexion.ui \
@@ -30,7 +33,10 @@ HEADERS += \
     view/pokerclientgui.h \
     view/pokerwidget.h \
     view/playerwidget.h \
-    network/clientsock.h
+    network/clientsock.h \
+    network/commands.h \
+    network/request.h \
+    network/utils.h
 
 RESOURCES += \
     images.qrc
