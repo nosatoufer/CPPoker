@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include "pokerwidget.h"
+#include "controller/controller.h"
 
 namespace Ui {
 class PokerClientGui;
@@ -33,6 +34,7 @@ private slots:
 private:
     Ui::PokerClientGui *ui;
     PokerWidget * pokerwidget = nullptr;
+    Controler * controller;
     QString playerName;
     QString addressIP;
     int port;

@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "controller/controller.h"
+
 namespace Ui {
 class MenuConnexion;
 }
@@ -12,7 +14,7 @@ class MenuConnexion : public QDialog
     Q_OBJECT
 
 public:
-    explicit MenuConnexion(QWidget *parent = 0);
+    explicit MenuConnexion(Controler * controller, QWidget *parent = 0);
     ~MenuConnexion();
     QString getPlayerName();
     QString getAddressIP();
@@ -23,6 +25,7 @@ private slots:
     void slotAnnuler();
 
 private:
+    Controler * controller;
     Ui::MenuConnexion *ui;
     QString playerName;
     QString addressIP;

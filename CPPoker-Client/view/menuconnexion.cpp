@@ -7,7 +7,8 @@
  * @brief MenuConnexion::MenuConnexion Constructeur de la fenêtre de connexion
  * @param parent
  */
-MenuConnexion::MenuConnexion(QWidget *parent) :
+MenuConnexion::MenuConnexion(Controler * controller, QWidget *parent) :
+    controller(controller),
     QDialog(parent),
     ui(new Ui::MenuConnexion)
 {
@@ -88,8 +89,10 @@ void MenuConnexion::slotConnexion()
     this->playerName = ui->lineEditNamePlayer->text();
     this->addressIP = ui->lineEditIPAddress->text();
     this->port = ui->lineEditPort->text().toInt();
-    this->close();
-}
+    if( controller->connectTo(this->addressIP, this->port ))
+        this->close();
+    else
+        QMessageBox::warning(this, tr("Connexion échouée !"), tr("Impossible de se connecter !"));}
 
 /**
  * @brief MenuConnexion::slotAnnuler Slot du bouton "Annuler"

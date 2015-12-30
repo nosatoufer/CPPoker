@@ -24,7 +24,8 @@ SOURCES += \
     network/request.cpp \
     network/utils.cpp \
     view/menuchooseroom.cpp \
-    view/menucreateroom.cpp
+    view/menucreateroom.cpp \
+    controller/controler.cpp
 
 FORMS += \
     view/menuconnexion.ui \
@@ -42,7 +43,8 @@ HEADERS += \
     network/request.h \
     network/utils.h \
     view/menuchooseroom.h \
-    view/menucreateroom.h
+    view/menucreateroom.h \
+    controller/controller.h
 
 RESOURCES += \
     images.qrc

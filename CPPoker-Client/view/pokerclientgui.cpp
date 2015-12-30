@@ -14,6 +14,8 @@ PokerClientGui::PokerClientGui(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    controller = new Controler();
+
     //Taille de la fenêtre non modifiable
     setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
@@ -99,7 +101,7 @@ void PokerClientGui::slotConnexion()
 
     //Affichage de la fenêtre de connexion
     this->hide();
-    MenuConnexion menuCo;
+    MenuConnexion menuCo(controller);
     menuCo.exec();
 
     //Récupération des données
