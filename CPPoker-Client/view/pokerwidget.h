@@ -29,8 +29,9 @@ public:
     QPushButton * getButtonFold();
     void addCard(string pathCardFile);
     void deleteAllCards();
-    void addPlayer(string namePlayer);
+    void addPlayer(string namePlayer, float money);
     void deleteAllPlayers();
+    PlayerWidget * getPlayerWidget(int index);
 };
 
 #endif // POKERWIDGET_H

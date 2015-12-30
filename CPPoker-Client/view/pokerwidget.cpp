@@ -37,12 +37,16 @@ PokerWidget::PokerWidget() : QWidget()
     this->addCard(":/img/cards/2_of_clubs.png");
     this->addCard(":/img/cards/2_of_clubs.png");
 
-    this->addPlayer("joueur1");
-    this->addPlayer("joueur2");
-    this->addPlayer("joueur3");
-    this->addPlayer("joueur4");
-    this->addPlayer("joueur5");
-    this->addPlayer("joueur6");
+    this->addPlayer("joueur1",0.1);
+    this->addPlayer("joueur2",0.);
+    this->addPlayer("joueur3",200.);
+    this->addPlayer("joueur4",0.);
+    this->addPlayer("joueur5",0.);
+    this->addPlayer("joueur6",0.);
+
+    this->getPlayerWidget(0)->setVisiblePionDealer(true);
+    this->getPlayerWidget(1)->setVisiblePionSmallBlind(true);
+    this->getPlayerWidget(2)->setVisiblePionBigBlind(true);
 }
 
 /**
@@ -107,19 +111,19 @@ void PokerWidget::addCard(string pathCardFile)
     this->cards[index]->setPixmap(imgCard.scaled(68,100,Qt::KeepAspectRatio));
     switch (index) {
         case 0:
-            this->cards[index]->move(244 - (this->cards[index]->size().width()/2), 190);
+            this->cards[index]->move(244 - (this->cards[index]->size().width()/2), 220);
             break;
         case 1:
-            this->cards[index]->move(322 - (this->cards[index]->size().width()/2), 190);
+            this->cards[index]->move(322 - (this->cards[index]->size().width()/2), 220);
             break;
         case 2:
-            this->cards[index]->move(400 - (this->cards[index]->size().width()/2), 190);
+            this->cards[index]->move(400 - (this->cards[index]->size().width()/2), 220);
             break;
         case 3:
-            this->cards[index]->move(478 - (this->cards[index]->size().width()/2), 190);
+            this->cards[index]->move(478 - (this->cards[index]->size().width()/2), 220);
             break;
         case 4:
-            this->cards[index]->move(556 - (this->cards[index]->size().width()/2), 190);
+            this->cards[index]->move(556 - (this->cards[index]->size().width()/2), 220);
             break;
     }
 }
@@ -141,29 +145,29 @@ void PokerWidget::deleteAllCards()
  * @brief PokerWidget::addPlayer Méthode permettant d'ajouter un nouveau joueur dans le widget
  * @param namePlayer Nom du joueur
  */
-void PokerWidget::addPlayer(string namePlayer)
+void PokerWidget::addPlayer(string namePlayer, float money)
 {
     if ((int)this->playerWidget.size() >= this->NB_MAX_PLAYER) return;
     int index = this->playerWidget.size();
-    this->playerWidget.push_back(new PlayerWidget(this, namePlayer));
+    this->playerWidget.push_back(new PlayerWidget(this, namePlayer, money));
     switch (index) {
         case 0:
-            this->playerWidget[index]->move(50, 70);
+            this->playerWidget[index]->move(50, 60);
             break;
         case 1:
-            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 20);
+            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 10);
             break;
         case 2:
-            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 70);
+            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 60);
             break;
         case 3:
-            this->playerWidget[index]->move(50, 350);
+            this->playerWidget[index]->move(50, 290);
             break;
         case 4:
-            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 400);
+            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 340);
             break;
         case 5:
-            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 350);
+            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 290);
             break;
     }
 }
@@ -179,4 +183,16 @@ void PokerWidget::deleteAllPlayers()
         this->playerWidget[i] = nullptr;
     }
     this->playerWidget.clear();
+}
+
+PlayerWidget * PokerWidget::getPlayerWidget(int index)
+{
+    if(index >=0 && index < (int)this->playerWidget.size())
+    {
+        return this->playerWidget[index];
+    }
+    else
+    {
+        return nullptr;
+    }
 }
