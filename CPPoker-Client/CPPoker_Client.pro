@@ -22,11 +22,15 @@ SOURCES += \
     view/playerwidget.cpp \
     network/clientsock.cpp \
     network/request.cpp \
-    network/utils.cpp
+    network/utils.cpp \
+    view/menuchooseroom.cpp \
+    view/menucreateroom.cpp
 
 FORMS += \
     view/menuconnexion.ui \
-    view/pokerclientgui.ui
+    view/pokerclientgui.ui \
+    view/menuchooseroom.ui \
+    view/menucreateroom.ui
 
 HEADERS += \
     view/menuconnexion.h \
@@ -36,7 +40,9 @@ HEADERS += \
     network/clientsock.h \
     network/commands.h \
     network/request.h \
-    network/utils.h
+    network/utils.h \
+    view/menuchooseroom.h \
+    view/menucreateroom.h
 
 RESOURCES += \
     images.qrc

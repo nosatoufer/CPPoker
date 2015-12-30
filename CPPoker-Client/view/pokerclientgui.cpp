@@ -1,6 +1,8 @@
 #include "pokerclientgui.h"
 #include "ui_pokerclientgui.h"
 #include "menuconnexion.h"
+#include "menuchooseroom.h"
+#include "menucreateroom.h"
 
 /**
  * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
@@ -84,6 +86,7 @@ void PokerClientGui::slotConnexion()
     }
 
     //Suppresion de la partie en cours
+    this->resize(300, 100);
     if(this->pokerwidget != nullptr)
     {
         disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
@@ -95,23 +98,34 @@ void PokerClientGui::slotConnexion()
     }
 
     //Affichage de la fenêtre de connexion
+    this->hide();
     MenuConnexion menuCo;
     menuCo.exec();
 
     //Récupération des données
     if(!(menuCo.getPlayerName() == ""))
     {
-        this->playerName = menuCo.getPlayerName();
-        this->addressIP = menuCo.getAddressIP();
-        this->port = menuCo.getPort();
-        this->isConnected = true;
-        this->pokerwidget = new PokerWidget();
-        this->setCentralWidget(this->pokerwidget);
-        connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-        connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-        connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-        connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
-        this->resize(800, 600);
+        MenuChooseRoom menuChooseRoom;
+        menuChooseRoom.exec();
+        if(!(menuChooseRoom.getNameRoom() == ""))
+        {
+            this->playerName = menuCo.getPlayerName();
+            this->addressIP = menuCo.getAddressIP();
+            this->port = menuCo.getPort();
+            this->isConnected = true;
+            this->pokerwidget = new PokerWidget();
+            this->setCentralWidget(this->pokerwidget);
+            connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
+            connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
+            connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
+            connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+            this->resize(800, 600);
+            this->show();
+        }else{
+            this->show();
+        }
+    }else{
+        this->show();
     }
 }
 
@@ -130,8 +144,6 @@ void PokerClientGui::slotNouveauSalon()
         }
     }
 
-    //BESOIN DE QUEL INFO POUR LE NOUVEAU SALON ???
-
     if(this->pokerwidget != nullptr)
     {
         disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
@@ -141,15 +153,26 @@ void PokerClientGui::slotNouveauSalon()
         delete(this->pokerwidget);
         this->pokerwidget = nullptr;
     }
+    this->resize(300, 100);
 
-    this->isConnected = true;
-    this->pokerwidget = new PokerWidget();
-    this->setCentralWidget(this->pokerwidget);
-    connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-    connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-    connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-    connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
-    this->resize(800, 600);
+    this->hide();
+    MenuCreateRoom menuCreateRoom;
+    menuCreateRoom.exec();
+
+    //Récupération des données
+    if(!(menuCreateRoom.getRoomName() == ""))
+    {
+        this->isConnected = true;
+        this->pokerwidget = new PokerWidget();
+        this->setCentralWidget(this->pokerwidget);
+        connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
+        connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
+        connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
+        connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+        this->resize(800, 600);
+        this->show();
+    }
+    this->show();
 }
 
 /**
@@ -172,7 +195,7 @@ void PokerClientGui::slotDeconnexion()
                 delete(this->pokerwidget);
                 this->pokerwidget = nullptr;
             }
-            this->resize(400, 300);
+            this->resize(300, 100);
         }
     }
     else

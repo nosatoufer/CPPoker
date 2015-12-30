@@ -5,8 +5,14 @@ INPUT(
 ./release\pokerwidget.o
 ./release\playerwidget.o
 ./release\clientsock.o
+./release\request.o
+./release\utils.o
+./release\menuchooseroom.o
+./release\menucreateroom.o
 ./release\qrc_images.o
 ./release\moc_menuconnexion.o
 ./release\moc_pokerclientgui.o
 ./release\moc_clientsock.o
+./release\moc_menuchooseroom.o
+./release\moc_menucreateroom.o
 );
