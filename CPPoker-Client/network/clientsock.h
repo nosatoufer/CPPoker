@@ -13,8 +13,9 @@ class ClientSock : public QObject
 private:
     QTcpSocket * m_sock;
     std::vector<Request *> m_requests;
+    std::string nickname;
 public:
-    explicit ClientSock(QString ip = "127.0.0.1", int port = 1234, QObject * parent = 0);
+    explicit ClientSock(QString ip = "127.0.0.1", int port = 1234, QString nickname="", QObject * parent = 0);
 
     /**
      * @brief write convert a request and write it on the socket

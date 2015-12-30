@@ -25,7 +25,7 @@ SOURCES += \
     network/utils.cpp \
     view/menuchooseroom.cpp \
     view/menucreateroom.cpp \
-    controller/controler.cpp
+    controller/controller.cpp
 
 FORMS += \
     view/menuconnexion.ui \

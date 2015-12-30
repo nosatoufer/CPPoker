@@ -7,7 +7,7 @@
  * @brief MenuConnexion::MenuConnexion Constructeur de la fenêtre de connexion
  * @param parent
  */
-MenuConnexion::MenuConnexion(Controler * controller, QWidget *parent) :
+MenuConnexion::MenuConnexion(Controller * controller, QWidget *parent) :
     controller(controller),
     QDialog(parent),
     ui(new Ui::MenuConnexion)
@@ -89,7 +89,7 @@ void MenuConnexion::slotConnexion()
     this->playerName = ui->lineEditNamePlayer->text();
     this->addressIP = ui->lineEditIPAddress->text();
     this->port = ui->lineEditPort->text().toInt();
-    if( controller->connectTo(this->addressIP, this->port ))
+    if(controller->connectTo(this->addressIP, this->port, this->playerName))
         this->close();
     else
         QMessageBox::warning(this, tr("Connexion échouée !"), tr("Impossible de se connecter !"));}

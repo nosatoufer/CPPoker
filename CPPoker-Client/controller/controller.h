@@ -1,13 +1,17 @@
 #ifndef CONTROLER_H
 #define CONTROLER_H
 #include "network/clientsock.h"
+#include "../view/pokerclientgui.h"
 
-class Controler
+class PokerClientGui;
+
+class Controller
 {
 private:
-    ClientSock * m_socket;
+    ClientSock* m_socket;
+    PokerClientGui* view;
 public:
-    Controler();
+    Controller(PokerClientGui* view);
 
     /**
      * @brief setSocket initialise the socket
@@ -48,7 +52,19 @@ public:
      */
     void raise(int raise);
 
-    bool connectTo(QString ip, int port);
+    /**
+     * @brief connectTo
+     * @param ip
+     * @param port
+     * @return
+     */
+    bool connectTo(QString ip, int port, QString nickname);
+
+    /**
+     * @brief isConnected
+     * @return
+     */
+    bool isConnected();
 
 private:
 

@@ -14,7 +14,7 @@ class MenuConnexion : public QDialog
     Q_OBJECT
 
 public:
-    explicit MenuConnexion(Controler * controller, QWidget *parent = 0);
+    explicit MenuConnexion(Controller * controller, QWidget *parent = 0);
     ~MenuConnexion();
     QString getPlayerName();
     QString getAddressIP();
@@ -25,7 +25,7 @@ private slots:
     void slotAnnuler();
 
 private:
-    Controler * controller;
+    Controller * controller;
     Ui::MenuConnexion *ui;
     QString playerName;
     QString addressIP;

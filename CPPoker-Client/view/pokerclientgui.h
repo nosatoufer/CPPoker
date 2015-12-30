@@ -9,6 +9,7 @@
 namespace Ui {
 class PokerClientGui;
 }
+class Controller;
 
 class PokerClientGui : public QMainWindow
 {
@@ -16,6 +17,7 @@ class PokerClientGui : public QMainWindow
 
 public:
     explicit PokerClientGui(QWidget *parent = 0);
+    void attachController(Controller* controller);
     ~PokerClientGui();
 
 private slots:
@@ -34,7 +36,7 @@ private slots:
 private:
     Ui::PokerClientGui *ui;
     PokerWidget * pokerwidget = nullptr;
-    Controler * controller;
+    Controller * controller;
     QString playerName;
     QString addressIP;
     int port;

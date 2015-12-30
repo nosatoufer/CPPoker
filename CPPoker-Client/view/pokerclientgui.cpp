@@ -14,7 +14,7 @@ PokerClientGui::PokerClientGui(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    controller = new Controler();
+    this->controller = new Controller(this);
 
     //Taille de la fenêtre non modifiable
     setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -78,7 +78,8 @@ void PokerClientGui::slotQuitter()
 void PokerClientGui::slotConnexion()
 {
     //Vérification si le client est déjà connecté
-    if(this->isConnected)
+    qDebug() << "OK 1";
+    if(this->controller->isConnected())
     {
         QMessageBox::StandardButton reply = QMessageBox::question(this, "Se connecter sur un autre serveur ?", "Voulez-vous vraiment vous connecter sur un autre serveur ? Si oui, votre partie sera interrompu !", QMessageBox::Yes|QMessageBox::No);
         if (reply == QMessageBox::No)
@@ -86,6 +87,7 @@ void PokerClientGui::slotConnexion()
             return;
         }
     }
+    qDebug() << "OK 2";
 
     //Suppresion de la partie en cours
     this->resize(300, 100);
@@ -100,13 +102,14 @@ void PokerClientGui::slotConnexion()
     }
 
     //Affichage de la fenêtre de connexion
-    this->hide();
     MenuConnexion menuCo(controller);
     menuCo.exec();
 
     //Récupération des données
+    /*
     if(!(menuCo.getPlayerName() == ""))
     {
+        this->controller->connectTo(menuCo.getAddressIP(),menuCo.getPort(),menuCo.getPlayerName());
         MenuChooseRoom menuChooseRoom;
         menuChooseRoom.exec();
         if(!(menuChooseRoom.getNameRoom() == ""))
@@ -123,12 +126,12 @@ void PokerClientGui::slotConnexion()
             connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
             this->resize(800, 600);
             this->show();
-        }else{
+        } else {
             this->show();
         }
     }else{
-        this->show();
     }
+    */
 }
 
 /**
@@ -260,4 +263,9 @@ void PokerClientGui::slotCall()
 void PokerClientGui::slotRaise()
 {
     QMessageBox::information(this, tr("Slot Raise"), tr("A completé"));
+}
+
+void PokerClientGui::attachController(Controller* controller)
+{
+    this->controller = controller;
 }
