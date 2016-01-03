@@ -6,6 +6,9 @@
 class PokerClientGui;
 class ClientSock;
 
+/**
+ * @brief The Controller class manages the communication between the ClientSocket and View
+ */
 class Controller
 {
 private:
@@ -94,6 +97,8 @@ public:
     void startGame();
 
     void gameStarted();
+
+    void addPlayer(QString pName);
 
 private:
     void readRequest();

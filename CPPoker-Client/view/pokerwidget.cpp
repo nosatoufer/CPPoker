@@ -1,4 +1,5 @@
 #include "pokerwidget.h"
+#include <QDebug>
 
 /**
  * @brief PokerWidget::PokerWidget Constructeur du widget représentant la table de poker
@@ -7,7 +8,7 @@ PokerWidget::PokerWidget() : QWidget()
 {
     //Couleur de fond
     QPalette Pal(palette());
-    Pal.setColor(QPalette::Background, Qt::green);
+    Pal.setColor(QPalette::Background, Qt::darkGreen);
     this->setAutoFillBackground(true);
     this->setPalette(Pal);
 
@@ -30,13 +31,12 @@ PokerWidget::PokerWidget() : QWidget()
 
     /*
     //Exemple de gestion des cartes
-    this->addCard(":/img/cards/2_of_clubs.png");
     this->deleteAllCards();
-    this->addCard(":/img/cards/2_of_clubs.png");
-    this->addCard(":/img/cards/2_of_clubs.png");
-    this->addCard(":/img/cards/2_of_clubs.png");
-    this->addCard(":/img/cards/2_of_clubs.png");
-    this->addCard(":/img/cards/2_of_clubs.png");
+    this->addCard(":/img/cards/CLUBS/TWO.png");
+    this->addCard(":/img/cards/CLUBS/TWO.png");
+    this->addCard(":/img/cards/CLUBS/TWO.png");
+    this->addCard(":/img/cards/CLUBS/TWO.png");
+    this->addCard(":/img/cards/CLUBS/TWO.png");
 
     this->addPlayer("joueur1",0.1);
     this->addPlayer("joueur2",0.);
@@ -49,6 +49,7 @@ PokerWidget::PokerWidget() : QWidget()
     this->getPlayerWidget(1)->setVisiblePionSmallBlind(true);
     this->getPlayerWidget(2)->setVisiblePionBigBlind(true);
     */
+
 }
 
 /**
@@ -101,6 +102,7 @@ QPushButton * PokerWidget::getButtonFold()
 
 void PokerWidget::giveCard(QString card)
 {
+    //playerWidget.at(0)->
 }
 
 /**
@@ -109,27 +111,28 @@ void PokerWidget::giveCard(QString card)
  */
 void PokerWidget::addCard(QString card)
 {
+    qDebug() << card;
     if ((int)this->cards.size() >= this->NB_MAX_CARDS) return;
     QPixmap imgCard(":/img/cards/"+card+".png");
     int index = this->cards.size();
-    this->cards.push_back(new QLabel(this));
-    this->cards[index]->resize(68,100);
-    this->cards[index]->setPixmap(imgCard.scaled(68,100,Qt::KeepAspectRatio));
+    this->cards.append(new QLabel(this));
+    this->cards.at(index)->resize(68,100);
+    this->cards.at(index)->setPixmap(imgCard.scaled(68,100,Qt::KeepAspectRatio));
     switch (index) {
         case 0:
-            this->cards[index]->move(244 - (this->cards[index]->size().width()/2), 220);
+            this->cards.at(index)->move(244 - (this->cards.at(index)->size().width()/2), 220);
             break;
         case 1:
-            this->cards[index]->move(322 - (this->cards[index]->size().width()/2), 220);
+            this->cards.at(index)->move(322 - (this->cards.at(index)->size().width()/2), 220);
             break;
         case 2:
-            this->cards[index]->move(400 - (this->cards[index]->size().width()/2), 220);
+            this->cards.at(index)->move(400 - (this->cards.at(index)->size().width()/2), 220);
             break;
         case 3:
-            this->cards[index]->move(478 - (this->cards[index]->size().width()/2), 220);
+            this->cards.at(index)->move(478 - (this->cards.at(index)->size().width()/2), 220);
             break;
         case 4:
-            this->cards[index]->move(556 - (this->cards[index]->size().width()/2), 220);
+            this->cards.at(index)->move(556 - (this->cards.at(index)->size().width()/2), 220);
             break;
     }
 }
@@ -141,7 +144,7 @@ void PokerWidget::deleteAllCards()
 {
     for (int i = 0; i < (int)this->cards.size(); i++)
     {
-        delete this->cards[i];
+        delete this->cards.at(i);
         this->cards[i] = nullptr;
     }
     this->cards.clear();
@@ -153,27 +156,28 @@ void PokerWidget::deleteAllCards()
  */
 void PokerWidget::addPlayer(QString namePlayer, float money)
 {
+    qDebug() << "AddPlayer" << namePlayer;
     if ((int)this->playerWidget.size() >= this->NB_MAX_PLAYER) return;
     int index = this->playerWidget.size();
-    this->playerWidget.push_back(new PlayerWidget(this, namePlayer, money));
+    this->playerWidget.append(new PlayerWidget(this, namePlayer, money));
     switch (index) {
         case 0:
-            this->playerWidget[index]->move(50, 60);
+            this->playerWidget.at(index)->move(50, 60);
             break;
         case 1:
-            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 10);
+            this->playerWidget.at(index)->move(400 - this->playerWidget.at(index)->width()/2, 10);
             break;
         case 2:
-            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 60);
+            this->playerWidget.at(index)->move(750 - this->playerWidget.at(index)->width(), 60);
             break;
         case 3:
-            this->playerWidget[index]->move(50, 290);
+            this->playerWidget.at(index)->move(50, 290);
             break;
         case 4:
-            this->playerWidget[index]->move(400 - this->playerWidget[index]->width()/2, 340);
+            this->playerWidget.at(index)->move(400 - this->playerWidget.at(index)->width()/2, 340);
             break;
         case 5:
-            this->playerWidget[index]->move(750 - this->playerWidget[index]->width(), 290);
+            this->playerWidget.at(index)->move(750 - this->playerWidget.at(index)->width(), 290);
             break;
     }
 }
@@ -185,7 +189,7 @@ void PokerWidget::deleteAllPlayers()
 {
     for (int i = 0; i < (int)this->playerWidget.size(); i++)
     {
-        delete this->playerWidget[i];
+        delete this->playerWidget.at(i);
         this->playerWidget[i] = nullptr;
     }
     this->playerWidget.clear();
@@ -195,7 +199,7 @@ PlayerWidget * PokerWidget::getPlayerWidget(int index)
 {
     if(index >=0 && index < (int)this->playerWidget.size())
     {
-        return this->playerWidget[index];
+        return this->playerWidget.at(index);
     }
     else
     {

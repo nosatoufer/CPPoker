@@ -11,6 +11,9 @@ class PokerClientGui;
 }
 class Controller;
 
+/**
+ * @brief The PokerClientGui class
+ */
 class PokerClientGui : public QMainWindow
 {
     Q_OBJECT
@@ -32,9 +35,10 @@ public:
     void showTableCard(QString card);
 
 public slots:
-    void bet(int value);
+    void bet();
     void fold();
     void allIn();
+    void check();
 
 private slots:
     void slotQuitter();
@@ -48,13 +52,14 @@ private slots:
 
 private:
     Ui::PokerClientGui *ui;
-    PokerWidget * pokerwidget = nullptr;
+    PokerWidget * m_pokerwidget = nullptr;
     Controller * m_controller;
-    QString playerName;
+    QString m_playerName;
     QVector<QString> m_players;
-    QString addressIP;
-    int port;
-    bool isConnected = false;
+    QString m_addressIP;
+    int m_port;
+    bool m_isConnected = false;
+    QString m_pName;
 };
 
 #endif // POKERCLIENTGUI_H

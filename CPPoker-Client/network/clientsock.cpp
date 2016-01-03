@@ -21,64 +21,82 @@ void ClientSock::connected()
 
 void ClientSock::read()
 {
-    QString req(m_sock->readAll());
-    qDebug() << req;
-    Request* request = new Request(req.toStdString());
-    switch (request->getCommand()) {
-    case LOGIN:
-        if (request->isSet(Request::STATUS)) {
-            if (request->getStatus() == Request::STATUS_FAILURE) {
-                qDebug() << "LOGIN_3";
-                controller->nicknameUsed();
-                identified = false;
-            } else {
-                qDebug() << "LOGIN_2";
-                controller->nicknameAvailable();
-                identified = true;
-            }
-        } else {
-            qDebug() << "LOGIN_1";
-            request->set("pName", this->getNickname());
-            this->write(request->toString());
-        }
-        break;
+    QRegExp rex("[|]");
+    QString s(m_sock->readAll());
+    QStringList requests = s.split(rex, QString::SkipEmptyParts);
+    for(QString req : requests)
+        m_requests.insert(m_requests.begin(), req);
 
-    case ROOM_LIST:
-        qDebug() << "ROOM_LIST";
-        if (request->getStatus() == Request::STATUS_FAILURE) {
-            // A gérer
-        } else {
-            qDebug() << "Call display rooms";
-            this->controller->displayRooms(request->getMap("rooms"));
-        }
-        break;
+    manageRequest();
+}
 
-    case ROOM_CREATE:
-        qDebug() << "ROOM_CREATE";
-        //if (request->getStatus() == Request::STATUS_FAILURE) {
-        //this->controller->errorCreateRoom();
-        break;
-
-    case GAME_START:
-        controller->gameStarted();
-        break;
-
-    case POKER_GIVE_CARD:
+void ClientSock::manageRequest()
+{
+    while(m_requests.size() > 0)
     {
-        std::pair<QString,QString> cards;
-        cards.first = QString(request->get("cardOne").c_str());
-        cards.second = QString(request->get("cardTwo").c_str());
-        controller->playerCard(cards);
-        break;
+        QString req = m_requests.back();
+        m_requests.pop_back();
+        qDebug() << req;
+        Request* request = new Request(req.toStdString());
+        switch (request->getCommand()) {
+        case LOGIN:
+            if (request->isSet(Request::STATUS)) {
+                if (request->getStatus() == Request::STATUS_FAILURE) {
+                    qDebug() << "LOGIN_3";
+                    controller->nicknameUsed();
+                    identified = false;
+                } else {
+                    qDebug() << "LOGIN_2";
+                    controller->nicknameAvailable();
+                    identified = true;
+                }
+            } else {
+                qDebug() << "LOGIN_1";
+                request->set("pName", this->getNickname());
+                this->write(request->toString());
+            }
+            break;
+
+        case ROOM_LIST:
+            qDebug() << "ROOM_LIST";
+            if (request->getStatus() == Request::STATUS_FAILURE) {
+                // A gérer
+            } else {
+                qDebug() << "Call display rooms";
+                this->controller->displayRooms(request->getMap("rooms"));
+            }
+            break;
+
+        case ROOM_CREATE:
+            qDebug() << "ROOM_CREATE";
+            //if (request->getStatus() == Request::STATUS_FAILURE) {
+            //this->controller->errorCreateRoom();
+            break;
+
+        case GAME_START:
+            controller->gameStarted();
+            break;
+        case PLAYER_JOINED:
+            controller->addPlayer(QString(request->get("pName").c_str()));
+            break;
+
+        case POKER_GIVE_CARD:
+        {
+            std::pair<QString,QString> cards;
+            cards.first = QString(request->get("cardOne").c_str());
+            cards.second = QString(request->get("cardTwo").c_str());
+            controller->playerCard(cards);
+            break;
+        }
+        case POKER_SHOW_CARD_TABLE:
+            controller->showTableCard(QString(request->get("card").c_str()));
+            break;
+        default:
+            qDebug() << "Unknown command";
+            break;
+        }
+        delete request;
     }
-    case POKER_SHOW_CARD_TABLE:
-        controller->showTableCard(QString(request->get("card").c_str()));
-        break;
-    default:
-        qDebug() << "Unknown command";
-        break;
-    }
-    delete request;
 }
 
 void ClientSock::disconnected()
@@ -101,9 +119,10 @@ bool ClientSock::hasRequests()
 
 Request* ClientSock::getRequest()
 {
-    Request * c = m_requests.back();
-    m_requests.pop_back();
-    return c;
+
+    //Request * c = m_requests.back();
+    //m_requests.pop_back();
+    //return c;
 }
 
 bool ClientSock::isConnected()

@@ -10,13 +10,16 @@
 
 class Controller;
 
+/**
+ * @brief The ClientSock class reads and sends the request through the network
+ */
 class ClientSock : public QObject
 {
     Q_OBJECT
 private:
     QTcpSocket * m_sock;
     Controller* controller;
-    std::vector<Request *> m_requests;
+    QVector<QString> m_requests;
     std::string nickname;
     bool identified;
 public:
@@ -32,6 +35,9 @@ public slots:
     void connected();
     void read();
     void disconnected();
+
+private:
+    void manageRequest();
 };
 
 #endif // CLIENTSOCK_H

@@ -49,6 +49,15 @@ void Controller::allIn()
     }
 }
 
+void Controller::check()
+{
+    if(socket != NULL)
+    {
+        Request req = Request();
+        req.setCommand(POKER_CHECK);
+        socket->write(req);
+    }
+}
 
 void Controller::bet(int value)
 {
@@ -135,7 +144,8 @@ void Controller::nicknameAvailable()
     this->askRooms();
 }
 
-void Controller::createRoom(std::string name, unsigned int minPlayer, unsigned int maxPlayer, unsigned int smallBlind, unsigned int bigBlind)
+void Controller::createRoom(std::string name, unsigned int minPlayer,
+                            unsigned int maxPlayer, unsigned int smallBlind, unsigned int bigBlind)
 {
     if(socket != NULL)
     {
@@ -163,4 +173,9 @@ void Controller::startGame()
 void Controller::gameStarted()
 {
     view->startGame();
+}
+
+void Controller::addPlayer(QString pName)
+{
+    view->addPlayer(pName);
 }

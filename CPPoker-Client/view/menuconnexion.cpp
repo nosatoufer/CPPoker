@@ -36,7 +36,8 @@ MenuConnexion::~MenuConnexion()
 void MenuConnexion::slotConnexion()
 {
     //Vérification si les champs ne sont pas vide
-    if(ui->lineEditNamePlayer->text().isEmpty() || ui->lineEditIPAddress->text().isEmpty() || ui->lineEditPort->text().isEmpty()){
+    if(ui->lineEditNamePlayer->text().isEmpty() || ui->lineEditIPAddress->text().isEmpty()
+            || ui->lineEditPort->text().isEmpty()){
         QMessageBox::warning(this, tr("Champ vide !"), tr("Un des champ du formulaire n'est pas rempli"));
         return;
     }
@@ -75,13 +76,15 @@ void MenuConnexion::slotConnexion()
     {
         if(ui->lineEditPort->text()[i] < '0' || ui->lineEditPort->text()[i] > '9')
         {
-            QMessageBox::warning(this, tr("Port invalide !"), tr("Le numéro de port est doit être compris entre 0 et 65536 !"));
+            QMessageBox::warning(this, tr("Port invalide !"),
+                                 tr("Le numéro de port est doit être compris entre 0 et 65536 !"));
             return;
         }
     }
     if(ui->lineEditPort->text().toInt() < 0 || ui->lineEditPort->text().toInt() > 65536)
     {
-        QMessageBox::warning(this, tr("Port invalide !"), tr("Le numéro de port est doit être compris entre 0 et 65536 !"));
+        QMessageBox::warning(this, tr("Port invalide !"),
+                             tr("Le numéro de port est doit être compris entre 0 et 65536 !"));
         return;
     }
 

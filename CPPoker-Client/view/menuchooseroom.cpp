@@ -15,7 +15,8 @@ MenuChooseRoom::MenuChooseRoom(std::map<std::string, std::string> rooms, Control
     for (std::map<std::string, std::string>::iterator it=rooms.begin(); it!=rooms.end(); ++it) {
         temp = jsonDecode(it->second);
         if (temp.size() > 1) {
-            ui->tableRooms->addItem(QString::fromStdString(temp.at("name") + " - (" + temp.at("currentPlayer") + "/" + temp.at("maxPlayer") + ") "
+            ui->tableRooms->addItem(QString::fromStdString(temp.at("name")
+                                    + " - (" + temp.at("currentPlayer") + "/" + temp.at("maxPlayer") + ") "
                                     + " - (" + temp.at("smallBlind") + "/" + temp.at("bigBlind") + ")"));
             roomsName.push_back(temp.at("name"));
         }
@@ -38,7 +39,7 @@ void MenuChooseRoom::slotConnexion(){
         QString name = ui->tableRooms->selectedItems()[0]->text();
         QRegExp rx("[ ]");
         QStringList list = name.split(rx, QString::SkipEmptyParts);
-        QMessageBox::warning(this, "Joindre table", list.at(0));
+        //QMessageBox::warning(this, "Joindre table", list.at(0));
         controller->joinRoom(list.at(0));
         this->close();
     }

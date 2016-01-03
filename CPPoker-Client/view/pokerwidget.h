@@ -11,8 +11,8 @@ using namespace std;
 
 class PokerWidget : public QWidget{
 private:
-    vector<QLabel*> cards;
-    vector<PlayerWidget*> playerWidget;
+    QVector<QLabel*> cards;
+    QVector<PlayerWidget*> playerWidget;
     QPushButton * buttonBet = nullptr;
     QPushButton * buttonCheck = nullptr;
     QPushButton * buttonAllIn = nullptr;

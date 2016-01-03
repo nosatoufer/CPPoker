@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <sstream>
 
+/**
+ * @brief The Request class represents a request sent or to send on the network.
+ */
 class Request{
 private:
     std::map<std::string, std::string> values;
