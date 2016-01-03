@@ -4,7 +4,7 @@ ehthumbs.db
 
 # pro.user
 
-*.pro.user.*
+*.pro.user*
 
 # Folder config file
 Desktop.ini
