@@ -14,7 +14,7 @@
    <string>Poker - Texas Hold'em</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="images.qrc">
+   <iconset resource="../images.qrc">
     <normaloff>:/img/logoPoker.png</normaloff>:/img/logoPoker.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>300</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPartie">
@@ -33,6 +33,7 @@
     </property>
     <addaction name="actionConnexion"/>
     <addaction name="actionNouveauSalon"/>
+    <addaction name="actionD_marrer"/>
     <addaction name="separator"/>
     <addaction name="actionDeconnexion"/>
     <addaction name="separator"/>
@@ -88,10 +89,15 @@
     <string>Nouveau salon</string>
    </property>
   </action>
+  <action name="actionD_marrer">
+   <property name="text">
+    <string>Démarrer</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="images.qrc"/>
+  <include location="../images.qrc"/>
  </resources>
  <connections/>
 </ui>

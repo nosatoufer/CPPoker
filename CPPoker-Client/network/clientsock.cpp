@@ -25,42 +25,46 @@ void ClientSock::read()
     qDebug() << req;
     Request* request = new Request(req.toStdString());
     switch (request->getCommand()) {
-        case LOGIN:
-            if (request->isSet(Request::STATUS)) {
-                if (request->getStatus() == Request::STATUS_FAILURE) {
-                    qDebug() << "LOGIN_3";
-                    controller->nicknameUsed();
-                    identified = false;
-                } else {
-                    qDebug() << "LOGIN_2";
-                    controller->nicknameAvailable();
-                    identified = true;
-                }
-            } else {
-                qDebug() << "LOGIN_1";
-                request->set("pName", this->getNickname());
-                this->write(request->toString());
-            }
-        break;
-
-        case ROOM_LIST:
-            qDebug() << "ROOM_LIST";
+    case LOGIN:
+        if (request->isSet(Request::STATUS)) {
             if (request->getStatus() == Request::STATUS_FAILURE) {
-                // A gérer
+                qDebug() << "LOGIN_3";
+                controller->nicknameUsed();
+                identified = false;
             } else {
-                qDebug() << "Call display rooms";
-                this->controller->displayRooms(request->getMap("rooms"));
+                qDebug() << "LOGIN_2";
+                controller->nicknameAvailable();
+                identified = true;
             }
+        } else {
+            qDebug() << "LOGIN_1";
+            request->set("pName", this->getNickname());
+            this->write(request->toString());
+        }
         break;
 
-        case ROOM_CREATE:
-            qDebug() << "ROOM_CREATE";
-            //if (request->getStatus() == Request::STATUS_FAILURE) {
-                //this->controller->errorCreateRoom();
+    case ROOM_LIST:
+        qDebug() << "ROOM_LIST";
+        if (request->getStatus() == Request::STATUS_FAILURE) {
+            // A gérer
+        } else {
+            qDebug() << "Call display rooms";
+            this->controller->displayRooms(request->getMap("rooms"));
+        }
         break;
 
-        default:
-            qDebug() << "Unknown command";
+    case ROOM_CREATE:
+        qDebug() << "ROOM_CREATE";
+        //if (request->getStatus() == Request::STATUS_FAILURE) {
+        //this->controller->errorCreateRoom();
+        break;
+
+    case GAME_START:
+        controller->gameStarted();
+        break;
+
+    default:
+        qDebug() << "Unknown command";
         break;
     }
     delete request;

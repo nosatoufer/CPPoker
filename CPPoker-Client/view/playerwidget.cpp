@@ -5,7 +5,7 @@
  * @param parent Widget parent
  * @param name Nom du joueur
  */
-PlayerWidget::PlayerWidget(QWidget *parent, string name, float money) : QWidget(parent)
+PlayerWidget::PlayerWidget(QWidget *parent, QString name, float money) : QWidget(parent)
 {
     this->layoutPlayerWidget = new QVBoxLayout(this);
 
@@ -18,7 +18,7 @@ PlayerWidget::PlayerWidget(QWidget *parent, string name, float money) : QWidget(
     this->imgPlayer->setPixmap(imgUser.scaled(100,100,Qt::KeepAspectRatio));
     this->imgPlayer->setAlignment(Qt::AlignCenter);
 
-    this->labelNamePlayer = new QLabel(QString::fromStdString(name));
+    this->labelNamePlayer = new QLabel(name);
     this->labelNamePlayer->setAlignment(Qt::AlignCenter);
 
     this->labelMoney = new QLabel(QString::number(money) + " €");

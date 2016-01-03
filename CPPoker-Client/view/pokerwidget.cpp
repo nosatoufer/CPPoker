@@ -16,18 +16,19 @@ PokerWidget::PokerWidget() : QWidget()
     this->buttonFold->resize(100, 30);
     this->buttonFold->move(190, 550);
 
+    this->buttonAllIn = new QPushButton("AllIN", this);
+    this->buttonAllIn->resize(100, 30);
+    this->buttonAllIn->move(295, 550);
+
     this->buttonCheck = new QPushButton("Check", this);
     this->buttonCheck->resize(100, 30);
-    this->buttonCheck->move(295, 550);
+    this->buttonCheck->move(405, 550);
 
-    this->buttonCall = new QPushButton("Call", this);
-    this->buttonCall->resize(100, 30);
-    this->buttonCall->move(405, 550);
+    this->buttonBet = new QPushButton("Bet", this);
+    this->buttonBet->resize(100, 30);
+    this->buttonBet->move(510, 550);
 
-    this->buttonRaise = new QPushButton("Raise", this);
-    this->buttonRaise->resize(100, 30);
-    this->buttonRaise->move(510, 550);
-
+    /*
     //Exemple de gestion des cartes
     this->addCard(":/img/cards/2_of_clubs.png");
     this->deleteAllCards();
@@ -47,6 +48,7 @@ PokerWidget::PokerWidget() : QWidget()
     this->getPlayerWidget(0)->setVisiblePionDealer(true);
     this->getPlayerWidget(1)->setVisiblePionSmallBlind(true);
     this->getPlayerWidget(2)->setVisiblePionBigBlind(true);
+    */
 }
 
 /**
@@ -54,38 +56,38 @@ PokerWidget::PokerWidget() : QWidget()
  */
 PokerWidget::~PokerWidget(){
     delete this->buttonFold;
+    delete this->buttonAllIn;
     delete this->buttonCheck;
-    delete this->buttonCall;
-    delete this->buttonRaise;
+    delete this->buttonBet;
     this->deleteAllCards();
     this->deleteAllPlayers();
 }
 
 /**
- * @brief PokerWidget::getButtonRaise Accesseur du bouton "Raise"
+ * @brief PokerWidget::getButtonRaise Accesseur du bouton "Bet"
  * @return Bouton "Raise"
  */
-QPushButton * PokerWidget::getButtonRaise()
+QPushButton * PokerWidget::getButtonBet()
 {
-    return this->buttonRaise;
+    return this->buttonBet;
 }
 
 /**
- * @brief PokerWidget::getButtonCall Accesseur du bouton "Call"
+ * @brief PokerWidget::getButtonCall Accesseur du bouton "Check"
  * @return Bouton "Call"
- */
-QPushButton * PokerWidget::getButtonCall()
-{
-    return this->buttonCall;
-}
-
-/**
- * @brief PokerWidget::getButtonCheck Accesseur du bouton "Check"
- * @return Bouton "Check"
  */
 QPushButton * PokerWidget::getButtonCheck()
 {
     return this->buttonCheck;
+}
+
+/**
+ * @brief PokerWidget::getButtonCheck Accesseur du bouton "AllIn"
+ * @return Bouton "Check"
+ */
+QPushButton * PokerWidget::getButtonAllIn()
+{
+    return this->buttonAllIn;
 }
 
 /**
@@ -101,10 +103,10 @@ QPushButton * PokerWidget::getButtonFold()
  * @brief PokerWidget::addCard Méthode permettant d'ajouter une carte dans le widget
  * @param pathCardFile Chemin de l'image de la carte
  */
-void PokerWidget::addCard(string pathCardFile)
+void PokerWidget::addCard(QString card)
 {
     if ((int)this->cards.size() >= this->NB_MAX_CARDS) return;
-    QPixmap imgCard(QString::fromStdString(pathCardFile));
+    QPixmap imgCard(":/img/cards/"+card+".png");
     int index = this->cards.size();
     this->cards.push_back(new QLabel(this));
     this->cards[index]->resize(68,100);
@@ -145,7 +147,7 @@ void PokerWidget::deleteAllCards()
  * @brief PokerWidget::addPlayer Méthode permettant d'ajouter un nouveau joueur dans le widget
  * @param namePlayer Nom du joueur
  */
-void PokerWidget::addPlayer(string namePlayer, float money)
+void PokerWidget::addPlayer(QString namePlayer, float money)
 {
     if ((int)this->playerWidget.size() >= this->NB_MAX_PLAYER) return;
     int index = this->playerWidget.size();

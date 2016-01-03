@@ -50,10 +50,10 @@ public:
     void call();
 
     /**
-     * @brief raise tells to the server th player wants to raise
-     * @param raise the amout to raise
+     * @brief bet tells to the server the player wants to bet the given amout
+     * @param value the amout to bet
      */
-    void raise(int raise);
+    void bet(int value);
 
     /**
      * @brief connectTo
@@ -86,6 +86,10 @@ public:
     void attachModel(ClientSock* socket);
 
     void createRoom(std::string name, unsigned int minPlayer, unsigned int maxPlayer, unsigned int smallBlind, unsigned int bigBlind);
+
+    void startGame();
+
+    void gameStarted();
 
 private:
     void readRequest();

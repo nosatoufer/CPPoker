@@ -13,9 +13,9 @@ class PokerWidget : public QWidget{
 private:
     vector<QLabel*> cards;
     vector<PlayerWidget*> playerWidget;
-    QPushButton * buttonRaise = nullptr;
-    QPushButton * buttonCall = nullptr;
+    QPushButton * buttonBet = nullptr;
     QPushButton * buttonCheck = nullptr;
+    QPushButton * buttonAllIn = nullptr;
     QPushButton * buttonFold = nullptr;
     const int NB_MAX_CARDS = 5;
     const int NB_MAX_PLAYER = 6;
@@ -23,13 +23,13 @@ private:
 public:
     PokerWidget();
     ~PokerWidget();
-    QPushButton * getButtonRaise();
-    QPushButton * getButtonCall();
+    QPushButton * getButtonBet();
     QPushButton * getButtonCheck();
+    QPushButton * getButtonAllIn();
     QPushButton * getButtonFold();
-    void addCard(string pathCardFile);
+    void addCard(QString card);
     void deleteAllCards();
-    void addPlayer(string namePlayer, float money);
+    void addPlayer(QString namePlayer, float money);
     void deleteAllPlayers();
     PlayerWidget * getPlayerWidget(int index);
 };

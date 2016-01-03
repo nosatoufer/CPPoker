@@ -16,13 +16,23 @@ class PokerClientGui : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PokerClientGui(Controller* controller, QWidget *parent = 0);
+    explicit PokerClientGui(Controller* m_controller, QWidget *parent = 0);
     ~PokerClientGui();
 
     void displayRooms(std::map<std::string, std::string> rooms);
 
     void displayErrorMessage(QString message);
     void displaySuccessMessage(QString message);
+
+    void startGame();
+
+    void addPlayer(QString player);
+    void remPlayer(QString player);
+
+public slots:
+    void bet(int value);
+    void fold();
+    void allIn();
 
 private slots:
     void slotQuitter();
@@ -32,16 +42,14 @@ private slots:
     void slotApropos();
     void slotRegles();
     void slotCombinaison();
-    void slotCheck();
-    void slotFold();
-    void slotCall();
-    void slotRaise();
+    void slotStartGame();
 
 private:
     Ui::PokerClientGui *ui;
     PokerWidget * pokerwidget = nullptr;
-    Controller * controller;
+    Controller * m_controller;
     QString playerName;
+    QVector<QString> m_players;
     QString addressIP;
     int port;
     bool isConnected = false;

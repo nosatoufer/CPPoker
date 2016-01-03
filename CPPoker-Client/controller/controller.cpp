@@ -49,33 +49,14 @@ void Controller::allIn()
     }
 }
 
-void Controller::check()
-{
-    if(socket != NULL)
-    {
-        Request req = Request();
-        req.setCommand(POKER_CHECK);
-        socket->write(req);
-    }
-}
 
-void Controller::call()
+void Controller::bet(int value)
 {
     if(socket != NULL)
     {
         Request req = Request();
-        req.setCommand(POKER_CALL);
-        socket->write(req);
-    }
-}
-
-void Controller::raise(int raise)
-{
-    if(socket != NULL)
-    {
-        Request req = Request();
-        req.setCommand(POKER_RAISE);
-        req.set("raise",std::to_string(raise));
+        req.setCommand(POKER_BET);
+        req.set("bet", std::to_string(value));
         socket->write(req);
     }
 }
@@ -156,4 +137,19 @@ void Controller::createRoom(std::string name, unsigned int minPlayer, unsigned i
         req.set("bigBlind", std::to_string(bigBlind));
         socket->write(req);
     }
+}
+
+void Controller::startGame()
+{
+    if(socket != NULL)
+    {
+        Request req = Request();
+        req.setCommand(GAME_START);
+        socket->write(req);
+    }
+}
+
+void Controller::gameStarted()
+{
+    view->startGame();
 }

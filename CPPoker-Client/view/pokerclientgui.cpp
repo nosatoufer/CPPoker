@@ -12,7 +12,7 @@
 PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PokerClientGui),
-    controller(controller)
+    m_controller(controller)
 {
     ui->setupUi(this);
 
@@ -27,6 +27,7 @@ PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
     connect(ui->actionRegles, &QAction::triggered, this, &PokerClientGui::slotRegles);
     connect(ui->actionCombinaisons, &QAction::triggered, this, &PokerClientGui::slotCombinaison);
     connect(ui->actionNouveauSalon, &QAction::triggered, this, &PokerClientGui::slotNouveauSalon);
+    connect(ui->actionD_marrer, &QAction::triggered, this, &PokerClientGui::slotStartGame);
 
     //Affichage de la fenêtre de connexion
     MenuConnexion menuCo(controller);
@@ -42,10 +43,10 @@ PokerClientGui::~PokerClientGui()
     //Suppresion du widget représentant la table de poker
     if(this->pokerwidget != nullptr)
     {
-        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-        disconnect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-        disconnect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(fold()));
+        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
+        disconnect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
+        disconnect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
         delete(this->pokerwidget);
         this->pokerwidget = nullptr;
     }
@@ -68,6 +69,43 @@ void PokerClientGui::displayErrorMessage(QString message)
 void PokerClientGui::displaySuccessMessage(QString message)
 {
     QMessageBox::information(this, "Bravo", message);
+}
+
+void PokerClientGui::startGame()
+{
+    pokerwidget = new PokerWidget();
+    for( QString player : m_players)
+        pokerwidget->addPlayer(player, 1000);
+    connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(fold()));
+    connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
+    connect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
+    connect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
+
+}
+
+void PokerClientGui::addPlayer(QString player)
+{
+    m_players.append(player);
+}
+
+void PokerClientGui::remPlayer(QString player)
+{
+    m_players.removeOne(player);
+}
+
+void PokerClientGui::bet(int value)
+{
+    m_controller->bet(value);
+}
+
+void PokerClientGui::fold()
+{
+    m_controller->fold();
+}
+
+void PokerClientGui::allIn()
+{
+    m_controller->allIn();
 }
 
 /**
@@ -96,7 +134,7 @@ void PokerClientGui::slotConnexion()
 {
     //Vérification si le client est déjà connecté
     qDebug() << "OK 1";
-    if(this->controller->isConnected())
+    if(this->m_controller->isConnected())
     {
         QMessageBox::StandardButton reply = QMessageBox::question(this, "Se connecter sur un autre serveur ?", "Voulez-vous vraiment vous connecter sur un autre serveur ? Si oui, votre partie sera interrompu !", QMessageBox::Yes|QMessageBox::No);
         if (reply == QMessageBox::No)
@@ -110,22 +148,21 @@ void PokerClientGui::slotConnexion()
     this->resize(300, 100);
     if(this->pokerwidget != nullptr)
     {
-        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-        disconnect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-        disconnect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
-        delete(this->pokerwidget);
+        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(fold()));
+        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
+        disconnect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
+        disconnect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
         this->pokerwidget = nullptr;
     }
 
     //Affichage de la fenêtre de connexion
-    MenuConnexion menuCo(controller);
+    MenuConnexion menuCo(m_controller);
     menuCo.exec();
 }
 
 void PokerClientGui::displayRooms(std::map<std::string, std::string> rooms) {
     qDebug() << "Call display rooms³";
-    MenuChooseRoom menuChooseRoom(rooms, controller, this);
+    MenuChooseRoom menuChooseRoom(rooms, m_controller, this);
     qDebug() << "Call display rooms 4";
     menuChooseRoom.exec();
     /*if(!(menuChooseRoom.getNameRoom() == ""))
@@ -164,16 +201,16 @@ void PokerClientGui::slotNouveauSalon()
 
     if(this->pokerwidget != nullptr)
     {
-        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-        disconnect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-        disconnect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+        disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(fold()));
+        disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
+        disconnect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
+        disconnect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
         delete(this->pokerwidget);
         this->pokerwidget = nullptr;
     }
     this->resize(300, 100);
 
-    MenuCreateRoom menuCreateRoom(controller);
+    MenuCreateRoom menuCreateRoom(m_controller);
     menuCreateRoom.exec();
 
     /*
@@ -208,10 +245,10 @@ void PokerClientGui::slotDeconnexion()
             this->isConnected = false;
             if(this->pokerwidget != nullptr)
             {
-                disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-                disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-                disconnect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-                disconnect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+                disconnect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(fold()));
+                disconnect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
+                disconnect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
+                disconnect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
                 delete(this->pokerwidget);
                 this->pokerwidget = nullptr;
             }
@@ -248,34 +285,8 @@ void PokerClientGui::slotCombinaison()
     QMessageBox::information(this, tr("Combinaisons"), tr("A completé"));
 }
 
-/**
- * @brief PokerClientGui::slotCheck Slot du bouton "Check"
- */
-void PokerClientGui::slotCheck()
-{
-    QMessageBox::information(this, tr("Slot Check"), tr("A completé"));
-}
 
-/**
- * @brief PokerClientGui::slotFold Slot du bouton "Fold"
- */
-void PokerClientGui::slotFold()
+void PokerClientGui::slotStartGame()
 {
-    QMessageBox::information(this, tr("Slot Fold"), tr("A completé"));
-}
-
-/**
- * @brief PokerClientGui::slotCall Slot du bouton "Call"
- */
-void PokerClientGui::slotCall()
-{
-    QMessageBox::information(this, tr("Slot Call"), tr("A completé"));
-}
-
-/**
- * @brief PokerClientGui::slotRaise Slot du bouton Raise
- */
-void PokerClientGui::slotRaise()
-{
-    QMessageBox::information(this, tr("Slot Raise"), tr("A completé"));
+    m_controller->startGame();
 }

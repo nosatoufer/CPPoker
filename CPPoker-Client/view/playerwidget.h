@@ -24,7 +24,7 @@ private:
     QLabel * labelBigBlind;
 
 public:
-    PlayerWidget(QWidget * parent, string name, float money);
+    PlayerWidget(QWidget * parent, QString name, float money);
     ~PlayerWidget();
     string getNamePlayer();
     void setNamePlayer(string newNamePlayer);
