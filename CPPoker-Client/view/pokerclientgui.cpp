@@ -93,6 +93,11 @@ void PokerClientGui::remPlayer(QString player)
     m_players.removeOne(player);
 }
 
+void PokerClientGui::giveCards(QString card)
+{
+    pokerwidget->addCard(card);
+}
+
 void PokerClientGui::bet(int value)
 {
     m_controller->bet(value);

@@ -3,8 +3,8 @@
 
 MenuCreateRoom::MenuCreateRoom(Controller* controller, QWidget *parent) :
     QDialog(parent),
-    controller(controller),
-    ui(new Ui::MenuCreateRoom)
+    ui(new Ui::MenuCreateRoom),
+    controller(controller)
 {
     ui->setupUi(this);
 

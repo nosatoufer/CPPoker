@@ -69,6 +69,8 @@ public:
      */
     bool isConnected();
 
+    void playerCard(std::pair<QString, QString> cards);
+
     bool isIdentified();
 
     void nicknameUsed();

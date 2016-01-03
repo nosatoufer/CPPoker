@@ -77,6 +77,12 @@ bool Controller::isConnected()
     }
 }
 
+void Controller::playerCard(std::pair<QString, QString> cards)
+{
+    view->giveCards(cards.first);
+    view->giveCards(cards.second);
+}
+
 bool Controller::isIdentified()
 {
     if (this->socket != NULL) {

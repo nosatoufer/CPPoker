@@ -63,6 +63,14 @@ void ClientSock::read()
         controller->gameStarted();
         break;
 
+    case POKER_GIVE_CARD:
+    {
+        std::pair<QString,QString> cards;
+        cards.first = QString(request->get("cardOne").c_str());
+        cards.second = QString(request->get("cardTwo").c_str());
+        controller->playerCard(cards);
+        break;
+    }
     default:
         qDebug() << "Unknown command";
         break;
