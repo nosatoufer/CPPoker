@@ -71,6 +71,8 @@ public:
 
     void playerCard(std::pair<QString, QString> cards);
 
+    void showTableCard(QString card);
+
     bool isIdentified();
 
     void nicknameUsed();

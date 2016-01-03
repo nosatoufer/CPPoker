@@ -71,6 +71,9 @@ void ClientSock::read()
         controller->playerCard(cards);
         break;
     }
+    case POKER_SHOW_CARD_TABLE:
+        controller->showTableCard(QString(request->get("card").c_str()));
+        break;
     default:
         qDebug() << "Unknown command";
         break;

@@ -99,6 +99,10 @@ QPushButton * PokerWidget::getButtonFold()
     return this->buttonFold;
 }
 
+void PokerWidget::giveCard(QString card)
+{
+}
+
 /**
  * @brief PokerWidget::addCard Méthode permettant d'ajouter une carte dans le widget
  * @param pathCardFile Chemin de l'image de la carte

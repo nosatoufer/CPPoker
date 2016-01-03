@@ -27,6 +27,7 @@ public:
     QPushButton * getButtonCheck();
     QPushButton * getButtonAllIn();
     QPushButton * getButtonFold();
+    void giveCard(QString card);
     void addCard(QString card);
     void deleteAllCards();
     void addPlayer(QString namePlayer, float money);

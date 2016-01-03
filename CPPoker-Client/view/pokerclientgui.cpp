@@ -95,6 +95,11 @@ void PokerClientGui::remPlayer(QString player)
 
 void PokerClientGui::giveCards(QString card)
 {
+//    pokerwidget->
+}
+
+void PokerClientGui::showTableCard(QString card)
+{
     pokerwidget->addCard(card);
 }
 

@@ -83,6 +83,11 @@ void Controller::playerCard(std::pair<QString, QString> cards)
     view->giveCards(cards.second);
 }
 
+void Controller::showTableCard(QString card)
+{
+///    view->
+}
+
 bool Controller::isIdentified()
 {
     if (this->socket != NULL) {

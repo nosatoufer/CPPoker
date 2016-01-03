@@ -29,6 +29,7 @@ public:
     void addPlayer(QString player);
     void remPlayer(QString player);
     void giveCards(QString card);
+    void showTableCard(QString card);
 
 public slots:
     void bet(int value);
