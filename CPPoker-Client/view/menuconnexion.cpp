@@ -7,7 +7,7 @@
  * @brief MenuConnexion::MenuConnexion Constructeur de la fenêtre de connexion
  * @param parent
  */
-MenuConnexion::MenuConnexion(Controller * controller, QWidget *parent) :
+MenuConnexion::MenuConnexion(Controller* controller, QWidget *parent) :
     controller(controller),
     QDialog(parent),
     ui(new Ui::MenuConnexion)

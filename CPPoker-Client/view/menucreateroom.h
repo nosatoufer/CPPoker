@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include "controller/controller.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class MenuCreateRoom : public QDialog
     Q_OBJECT
 
 public:
-    explicit MenuCreateRoom(QWidget *parent = 0);
+    explicit MenuCreateRoom(Controller* controller, QWidget *parent = 0);
     ~MenuCreateRoom();
     string getRoomName();
 
@@ -26,6 +27,7 @@ private slots:
 private:
     Ui::MenuCreateRoom *ui;
     string nameRoom = "";
+    Controller* controller;
 };
 
 #endif // MENUCREATEROOM_H

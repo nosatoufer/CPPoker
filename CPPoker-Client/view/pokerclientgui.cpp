@@ -8,13 +8,12 @@
  * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
  * @param parent
  */
-PokerClientGui::PokerClientGui(QWidget *parent) :
+PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::PokerClientGui)
+    ui(new Ui::PokerClientGui),
+    controller(controller)
 {
     ui->setupUi(this);
-
-    this->controller = new Controller(this);
 
     //Taille de la fenêtre non modifiable
     setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -27,6 +26,10 @@ PokerClientGui::PokerClientGui(QWidget *parent) :
     connect(ui->actionRegles, &QAction::triggered, this, &PokerClientGui::slotRegles);
     connect(ui->actionCombinaisons, &QAction::triggered, this, &PokerClientGui::slotCombinaison);
     connect(ui->actionNouveauSalon, &QAction::triggered, this, &PokerClientGui::slotNouveauSalon);
+
+    //Affichage de la fenêtre de connexion
+    MenuConnexion menuCo(controller);
+    menuCo.exec();
 }
 
 /**
@@ -51,6 +54,16 @@ PokerClientGui::~PokerClientGui()
         delete this->ui;
         this->pokerwidget = nullptr;
     }
+}
+
+void PokerClientGui::displayErrorMessage(QString message)
+{
+    QMessageBox::critical(this, "Erreur", message);
+}
+
+void PokerClientGui::displaySuccessMessage(QString message)
+{
+    QMessageBox::information(this, "Bravo", message);
 }
 
 /**
@@ -104,34 +117,30 @@ void PokerClientGui::slotConnexion()
     //Affichage de la fenêtre de connexion
     MenuConnexion menuCo(controller);
     menuCo.exec();
+}
 
-    //Récupération des données
-    /*
-    if(!(menuCo.getPlayerName() == ""))
+void PokerClientGui::displayRooms(std::map<std::string, std::string> rooms) {
+    qDebug() << "Call display rooms³";
+    MenuChooseRoom menuChooseRoom(rooms, controller, this);
+    qDebug() << "Call display rooms 4";
+    menuChooseRoom.exec();
+    /*if(!(menuChooseRoom.getNameRoom() == ""))
     {
-        this->controller->connectTo(menuCo.getAddressIP(),menuCo.getPort(),menuCo.getPlayerName());
-        MenuChooseRoom menuChooseRoom;
-        menuChooseRoom.exec();
-        if(!(menuChooseRoom.getNameRoom() == ""))
-        {
-            this->playerName = menuCo.getPlayerName();
-            this->addressIP = menuCo.getAddressIP();
-            this->port = menuCo.getPort();
-            this->isConnected = true;
-            this->pokerwidget = new PokerWidget();
-            this->setCentralWidget(this->pokerwidget);
-            connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-            connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-            connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-            connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
-            this->resize(800, 600);
-            this->show();
-        } else {
-            this->show();
-        }
-    }else{
-    }
-    */
+        this->playerName = menuCo.getPlayerName();
+        this->addressIP = menuCo.getAddressIP();
+        this->port = menuCo.getPort();
+        this->isConnected = true;
+        this->pokerwidget = new PokerWidget();
+        this->setCentralWidget(this->pokerwidget);
+        connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
+        connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
+        connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
+        connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
+        this->resize(800, 600);
+        this->show();
+    } else {
+        this->show();
+    }*/
 }
 
 /**
@@ -160,10 +169,11 @@ void PokerClientGui::slotNouveauSalon()
     }
     this->resize(300, 100);
 
-    this->hide();
-    MenuCreateRoom menuCreateRoom;
+    MenuCreateRoom menuCreateRoom(controller);
     menuCreateRoom.exec();
 
+    /*
+    this->hide();
     //Récupération des données
     if(!(menuCreateRoom.getRoomName() == ""))
     {
@@ -178,6 +188,7 @@ void PokerClientGui::slotNouveauSalon()
         this->show();
     }
     this->show();
+    */
 }
 
 /**
@@ -263,9 +274,4 @@ void PokerClientGui::slotCall()
 void PokerClientGui::slotRaise()
 {
     QMessageBox::information(this, tr("Slot Raise"), tr("A completé"));
-}
-
-void PokerClientGui::attachController(Controller* controller)
-{
-    this->controller = controller;
 }

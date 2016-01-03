@@ -1,8 +1,9 @@
 #include "menucreateroom.h"
 #include "ui_menucreateroom.h"
 
-MenuCreateRoom::MenuCreateRoom(QWidget *parent) :
+MenuCreateRoom::MenuCreateRoom(Controller* controller, QWidget *parent) :
     QDialog(parent),
+    controller(controller),
     ui(new Ui::MenuCreateRoom)
 {
     ui->setupUi(this);
@@ -23,10 +24,14 @@ string MenuCreateRoom::getRoomName()
 
 void MenuCreateRoom::slotCreate()
 {
-    if(ui->nameRoom->text() == ""){
+    if(ui->nameLineEdit->text() == "") {
         QMessageBox::warning(this, "Erreur !", "Vous devez indiquer le nom de table à créer !");
-    }else{
-        this->nameRoom = ui->nameRoom->text().toStdString();
+    } else {
+        this->controller->createRoom(ui->nameLineEdit->text().toStdString(),
+                                     ui->minPlayerSpinBox->value(),
+                                     ui->maxPlayerSpinBox->value(),
+                                     ui->smallBlindSpinBox->value(),
+                                     ui->bigBlindSpinBox->value());
         this->close();
     }
 }

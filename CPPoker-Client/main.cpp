@@ -5,9 +5,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    PokerClientGui w;
 
-    //Controller controller(&w);
+    Controller* controller = new Controller();
+
+    PokerClientGui w(controller);
+    controller->attachView(&w);
 
     w.show();
 

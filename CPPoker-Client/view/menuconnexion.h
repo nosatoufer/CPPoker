@@ -25,7 +25,7 @@ private slots:
     void slotAnnuler();
 
 private:
-    Controller * controller;
+    Controller* controller;
     Ui::MenuConnexion *ui;
     QString playerName;
     QString addressIP;

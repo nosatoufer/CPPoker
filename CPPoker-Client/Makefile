@@ -399,79 +399,79 @@ compiler_rcc_make_all: qrc_images.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_images.cpp
 qrc_images.cpp: images.qrc \
-		img/smallblind.png \
-		img/connexion.png \
-		img/user.png \
-		img/dealer.png \
-		img/logoPoker.png \
 		img/bigblind.png \
-		img/cards/jack_of_hearts2.png \
-		img/cards/ace_of_clubs.png \
-		img/cards/6_of_hearts.png \
-		img/cards/black_joker.png \
-		img/cards/jack_of_diamonds.png \
-		img/cards/jack_of_spades2.png \
-		img/cards/7_of_spades.png \
-		img/cards/8_of_hearts.png \
-		img/cards/ace_of_spades.png \
-		img/cards/10_of_spades.png \
+		img/user.png \
+		img/connexion.png \
+		img/dealer.png \
+		img/smallblind.png \
+		img/logoPoker.png \
 		img/cards/9_of_spades.png \
-		img/cards/king_of_spades.png \
-		img/cards/queen_of_hearts2.png \
-		img/cards/jack_of_diamonds2.png \
-		img/cards/queen_of_clubs2.png \
+		img/cards/king_of_diamonds2.png \
 		img/cards/queen_of_hearts.png \
-		img/cards/queen_of_spades2.png \
-		img/cards/4_of_diamonds.png \
-		img/cards/10_of_diamonds.png \
-		img/cards/jack_of_clubs.png \
+		img/cards/5_of_clubs.png \
+		img/cards/jack_of_diamonds.png \
 		img/cards/2_of_spades.png \
-		img/cards/queen_of_diamonds2.png \
-		img/cards/7_of_diamonds.png \
-		img/cards/jack_of_clubs2.png \
-		img/cards/2_of_diamonds.png \
-		img/cards/7_of_hearts.png \
-		img/cards/ace_of_hearts.png \
 		img/cards/10_of_hearts.png \
+		img/cards/4_of_spades.png \
+		img/cards/jack_of_spades.png \
+		img/cards/2_of_diamonds.png \
+		img/cards/4_of_clubs.png \
+		img/cards/ace_of_hearts.png \
 		img/cards/9_of_hearts.png \
-		img/cards/king_of_hearts.png \
 		img/cards/5_of_diamonds.png \
-		img/cards/9_of_clubs.png \
-		img/cards/queen_of_diamonds.png \
+		img/cards/3_of_clubs.png \
 		img/cards/2_of_hearts.png \
+		img/cards/ace_of_diamonds.png \
 		img/cards/8_of_diamonds.png \
 		img/cards/3_of_diamonds.png \
-		img/cards/king_of_hearts2.png \
+		img/cards/4_of_hearts.png \
 		img/cards/3_of_spades.png \
-		img/cards/king_of_spades2.png \
-		img/cards/8_of_clubs.png \
+		img/cards/jack_of_hearts.png \
 		img/cards/5_of_spades.png \
-		img/cards/jack_of_spades.png \
+		img/cards/black_joker.png \
+		img/cards/jack_of_hearts2.png \
+		img/cards/jack_of_spades2.png \
+		img/cards/king_of_clubs2.png \
 		img/cards/6_of_diamonds.png \
-		img/cards/red_joker.png \
-		img/cards/3_of_clubs.png \
-		img/cards/7_of_clubs.png \
-		img/cards/king_of_diamonds2.png \
+		img/cards/7_of_spades.png \
+		img/cards/jack_of_diamonds2.png \
+		img/cards/queen_of_clubs2.png \
 		img/cards/9_of_diamonds.png \
 		img/cards/king_of_clubs.png \
+		img/cards/4_of_diamonds.png \
+		img/cards/3_of_hearts.png \
+		img/cards/9_of_clubs.png \
+		img/cards/jack_of_clubs.png \
+		img/cards/5_of_hearts.png \
+		img/cards/10_of_clubs.png \
+		img/cards/7_of_diamonds.png \
+		img/cards/queen_of_hearts2.png \
+		img/cards/7_of_hearts.png \
+		img/cards/6_of_spades.png \
+		img/cards/queen_of_spades2.png \
+		img/cards/8_of_clubs.png \
+		img/cards/8_of_spades.png \
+		img/cards/king_of_spades.png \
 		img/cards/queen_of_clubs.png \
 		img/cards/ace_of_spades2.png \
-		img/cards/3_of_hearts.png \
-		img/cards/2_of_clubs.png \
-		img/cards/6_of_clubs.png \
-		img/cards/5_of_hearts.png \
-		img/cards/4_of_spades.png \
-		img/cards/jack_of_hearts.png \
-		img/cards/10_of_clubs.png \
-		img/cards/6_of_spades.png \
-		img/cards/king_of_clubs2.png \
-		img/cards/8_of_spades.png \
-		img/cards/5_of_clubs.png \
-		img/cards/king_of_diamonds.png \
+		img/cards/red_joker.png \
+		img/cards/queen_of_diamonds.png \
+		img/cards/10_of_diamonds.png \
 		img/cards/queen_of_spades.png \
-		img/cards/ace_of_diamonds.png \
-		img/cards/4_of_hearts.png \
-		img/cards/4_of_clubs.png
+		img/cards/7_of_clubs.png \
+		img/cards/ace_of_clubs.png \
+		img/cards/jack_of_clubs2.png \
+		img/cards/king_of_hearts2.png \
+		img/cards/queen_of_diamonds2.png \
+		img/cards/king_of_spades2.png \
+		img/cards/10_of_spades.png \
+		img/cards/6_of_hearts.png \
+		img/cards/king_of_diamonds.png \
+		img/cards/8_of_hearts.png \
+		img/cards/2_of_clubs.png \
+		img/cards/king_of_hearts.png \
+		img/cards/6_of_clubs.png \
+		img/cards/ace_of_spades.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images images.qrc -o qrc_images.cpp
 
 compiler_moc_header_make_all: moc_menuconnexion.cpp moc_pokerclientgui.cpp moc_clientsock.cpp moc_menuchooseroom.cpp moc_menucreateroom.cpp
@@ -847,6 +847,66 @@ moc_clientsock.cpp: /usr/include/qt5/QtNetwork/QTcpSocket \
 		network/request.h \
 		network/utils.h \
 		network/commands.h \
+		controller/controller.h \
+		network/clientsock.h \
+		view/pokerclientgui.h \
+		/usr/include/qt5/QtWidgets/QMainWindow \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtWidgets/QMessageBox \
+		/usr/include/qt5/QtWidgets/qmessagebox.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		view/pokerwidget.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/QPixmap \
+		view/playerwidget.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
 		network/clientsock.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include network/clientsock.h -o moc_clientsock.cpp
 
@@ -965,6 +1025,36 @@ moc_menuchooseroom.cpp: /usr/include/qt5/QtWidgets/QDialog \
 		/usr/include/qt5/QtGui/qicon.h \
 		/usr/include/qt5/QtWidgets/QMessageBox \
 		/usr/include/qt5/QtWidgets/qmessagebox.h \
+		controller/controller.h \
+		network/clientsock.h \
+		/usr/include/qt5/QtNetwork/QTcpSocket \
+		/usr/include/qt5/QtNetwork/qtcpsocket.h \
+		/usr/include/qt5/QtNetwork/qabstractsocket.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QDebug \
+		network/request.h \
+		network/utils.h \
+		network/commands.h \
+		view/pokerclientgui.h \
+		/usr/include/qt5/QtWidgets/QMainWindow \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		view/pokerwidget.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/QPixmap \
+		view/playerwidget.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
 		view/menuchooseroom.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include view/menuchooseroom.h -o moc_menuchooseroom.cpp
 
@@ -1883,7 +1973,66 @@ clientsock.o: network/clientsock.cpp network/clientsock.h \
 		/usr/include/qt5/QtCore/QDebug \
 		network/request.h \
 		network/utils.h \
-		network/commands.h
+		network/commands.h \
+		controller/controller.h \
+		view/pokerclientgui.h \
+		/usr/include/qt5/QtWidgets/QMainWindow \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtWidgets/QMessageBox \
+		/usr/include/qt5/QtWidgets/qmessagebox.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		view/pokerwidget.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/QPixmap \
+		view/playerwidget.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clientsock.o network/clientsock.cpp
 
 request.o: network/request.cpp network/request.h \
@@ -2010,6 +2159,36 @@ menuchooseroom.o: view/menuchooseroom.cpp view/menuchooseroom.h \
 		/usr/include/qt5/QtGui/qicon.h \
 		/usr/include/qt5/QtWidgets/QMessageBox \
 		/usr/include/qt5/QtWidgets/qmessagebox.h \
+		controller/controller.h \
+		network/clientsock.h \
+		/usr/include/qt5/QtNetwork/QTcpSocket \
+		/usr/include/qt5/QtNetwork/qtcpsocket.h \
+		/usr/include/qt5/QtNetwork/qabstractsocket.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QDebug \
+		network/request.h \
+		network/utils.h \
+		network/commands.h \
+		view/pokerclientgui.h \
+		/usr/include/qt5/QtWidgets/QMainWindow \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		view/pokerwidget.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/QPixmap \
+		view/playerwidget.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
 		ui_menuchooseroom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o menuchooseroom.o view/menuchooseroom.cpp
 

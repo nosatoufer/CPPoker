@@ -6,25 +6,28 @@
 #include <QDebug>
 
 #include "request.h"
+#include "../controller/controller.h"
+
+class Controller;
 
 class ClientSock : public QObject
 {
     Q_OBJECT
 private:
     QTcpSocket * m_sock;
+    Controller* controller;
     std::vector<Request *> m_requests;
     std::string nickname;
+    bool identified;
 public:
-    explicit ClientSock(QString ip = "127.0.0.1", int port = 1234, QString nickname="", QObject * parent = 0);
+    explicit ClientSock(QString ip, int port, QString nickname, Controller* controller, QObject * parent = 0);
 
-    /**
-     * @brief write convert a request and write it on the socket
-     * @param req the request to write
-     */
     void write(Request req);
     bool hasRequests();
     Request * getRequest();
     bool isConnected();
+    bool isIdentified();
+    std::string getNickname();
 public slots:
     void connected();
     void read();

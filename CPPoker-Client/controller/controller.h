@@ -1,17 +1,20 @@
 #ifndef CONTROLER_H
 #define CONTROLER_H
-#include "network/clientsock.h"
+#include "../network/clientsock.h"
 #include "../view/pokerclientgui.h"
 
 class PokerClientGui;
+class ClientSock;
 
 class Controller
 {
 private:
-    ClientSock* m_socket;
+    ClientSock* socket;
     PokerClientGui* view;
 public:
-    Controller(PokerClientGui* view);
+    Controller();
+
+    virtual ~Controller();
 
     /**
      * @brief setSocket initialise the socket
@@ -66,8 +69,23 @@ public:
      */
     bool isConnected();
 
-private:
+    bool isIdentified();
 
+    void nicknameUsed();
+
+    void nicknameAvailable();
+
+    void askRooms();
+
+    void displayRooms(std::map<std::string, std::string> rooms);
+
+    void attachView(PokerClientGui* view);
+
+    void attachModel(ClientSock* socket);
+
+    void createRoom(std::string name, unsigned int minPlayer, unsigned int maxPlayer, unsigned int smallBlind, unsigned int bigBlind);
+
+private:
     void readRequest();
 };
 

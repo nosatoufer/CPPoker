@@ -16,9 +16,13 @@ class PokerClientGui : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit PokerClientGui(QWidget *parent = 0);
-    void attachController(Controller* controller);
+    explicit PokerClientGui(Controller* controller, QWidget *parent = 0);
     ~PokerClientGui();
+
+    void displayRooms(std::map<std::string, std::string> rooms);
+
+    void displayErrorMessage(QString message);
+    void displaySuccessMessage(QString message);
 
 private slots:
     void slotQuitter();

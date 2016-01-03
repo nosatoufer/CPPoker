@@ -38,7 +38,7 @@
     <rect>
      <x>10</x>
      <y>210</y>
-     <width>141</width>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
@@ -49,14 +49,27 @@
   <widget class="QPushButton" name="buttonCancel">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>220</x>
      <y>210</y>
-     <width>141</width>
+     <width>91</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Annuler</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buttonCreate">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>210</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Créer table</string>
    </property>
   </widget>
  </widget>
