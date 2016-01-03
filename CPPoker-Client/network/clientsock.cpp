@@ -38,7 +38,7 @@ void ClientSock::read()
                 }
             } else {
                 qDebug() << "LOGIN_1";
-                request->setMessage(this->getNickname());
+                request->set("pName", this->getNickname());
                 this->write(request->toString());
             }
         break;

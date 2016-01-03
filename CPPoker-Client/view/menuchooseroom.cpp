@@ -41,6 +41,7 @@ void MenuChooseRoom::slotConnexion(){
         this->close();
     }
     TODO : GERER LA CONNEXION A LA TABLE
+    controller->joinRoom(TABLE_NAME);
     */
 }
 

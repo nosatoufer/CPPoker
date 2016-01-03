@@ -75,7 +75,7 @@ void Controller::raise(int raise)
     {
         Request req = Request();
         req.setCommand(POKER_RAISE);
-        req.setMessage(std::to_string(raise));
+        req.set("raise",std::to_string(raise));
         socket->write(req);
     }
 }
@@ -114,6 +114,17 @@ void Controller::askRooms() {
     }
 }
 
+void Controller::joinRoom(string name)
+{
+    if(socket != NULL)
+    {
+        Request req = Request();
+        req.setCommand(ROOM_JOIN);
+        req.set("rName", name);
+        socket->write(req);
+    }
+}
+
 void Controller::displayRooms(std::map<std::string, std::string> rooms) {
     qDebug() << "Call display rooms²";
     this->view->displayRooms(rooms);
@@ -145,5 +156,4 @@ void Controller::createRoom(std::string name, unsigned int minPlayer, unsigned i
         req.set("bigBlind", std::to_string(bigBlind));
         socket->write(req);
     }
-    this->askRooms();
 }
