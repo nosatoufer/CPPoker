@@ -145,4 +145,5 @@ void Controller::createRoom(std::string name, unsigned int minPlayer, unsigned i
         req.set("bigBlind", std::to_string(bigBlind));
         socket->write(req);
     }
+    this->askRooms();
 }

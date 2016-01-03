@@ -3,6 +3,7 @@
 #include "menuconnexion.h"
 #include "menuchooseroom.h"
 #include "menucreateroom.h"
+#include <QDebug>
 
 /**
  * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
@@ -37,6 +38,7 @@ PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
  */
 PokerClientGui::~PokerClientGui()
 {
+    qDebug() << "~PokerClientGui()";
     //Suppresion du widget représentant la table de poker
     if(this->pokerwidget != nullptr)
     {
@@ -54,6 +56,8 @@ PokerClientGui::~PokerClientGui()
         delete this->ui;
         this->pokerwidget = nullptr;
     }
+    qDebug() << "~PokerClientGui()";
+    qDebug() << "End.";
 }
 
 void PokerClientGui::displayErrorMessage(QString message)
