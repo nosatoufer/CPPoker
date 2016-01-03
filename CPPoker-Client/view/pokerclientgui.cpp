@@ -3,7 +3,6 @@
 #include "menuconnexion.h"
 #include "menuchooseroom.h"
 #include "menucreateroom.h"
-#include <QDebug>
 
 /**
  * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
@@ -39,7 +38,6 @@ PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
  */
 PokerClientGui::~PokerClientGui()
 {
-    qDebug() << "~PokerClientGui()";
     //Suppresion du widget représentant la table de poker
     if(this->pokerwidget != nullptr)
     {
@@ -57,8 +55,6 @@ PokerClientGui::~PokerClientGui()
         delete this->ui;
         this->pokerwidget = nullptr;
     }
-    qDebug() << "~PokerClientGui()";
-    qDebug() << "End.";
 }
 
 void PokerClientGui::displayErrorMessage(QString message)
@@ -80,7 +76,8 @@ void PokerClientGui::startGame()
     connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(check()));
     connect(this->pokerwidget->getButtonAllIn(), SIGNAL(clicked()), this, SLOT(allIn()));
     connect(this->pokerwidget->getButtonBet(), SIGNAL(clicked()), this, SLOT(bet()));
-
+    this->setCentralWidget(this->pokerwidget);
+    this->resize(800, 600);
 }
 
 void PokerClientGui::addPlayer(QString player)
@@ -90,7 +87,7 @@ void PokerClientGui::addPlayer(QString player)
 
 void PokerClientGui::remPlayer(QString player)
 {
-    m_players.removeOne(player);
+    //m_players.removeOne(player);
 }
 
 void PokerClientGui::giveCards(QString card)
@@ -168,6 +165,16 @@ void PokerClientGui::slotConnexion()
     //Affichage de la fenêtre de connexion
     MenuConnexion menuCo(m_controller);
     menuCo.exec();
+
+    //Récupération des données
+        if(!(menuCo.getPlayerName() == ""))
+        {
+            this->playerName = menuCo.getPlayerName();
+            this->addressIP = menuCo.getAddressIP();
+            this->port = menuCo.getPort();
+            this->isConnected = true;
+            this->startGame();
+        }
 }
 
 void PokerClientGui::displayRooms(std::map<std::string, std::string> rooms) {
@@ -222,24 +229,6 @@ void PokerClientGui::slotNouveauSalon()
 
     MenuCreateRoom menuCreateRoom(m_controller);
     menuCreateRoom.exec();
-
-    /*
-    this->hide();
-    //Récupération des données
-    if(!(menuCreateRoom.getRoomName() == ""))
-    {
-        this->isConnected = true;
-        this->pokerwidget = new PokerWidget();
-        this->setCentralWidget(this->pokerwidget);
-        connect(this->pokerwidget->getButtonFold(), SIGNAL(clicked()), this, SLOT(slotFold()));
-        connect(this->pokerwidget->getButtonCheck(), SIGNAL(clicked()), this, SLOT(slotCheck()));
-        connect(this->pokerwidget->getButtonCall(), SIGNAL(clicked()), this, SLOT(slotCall()));
-        connect(this->pokerwidget->getButtonRaise(), SIGNAL(clicked()), this, SLOT(slotRaise()));
-        this->resize(800, 600);
-        this->show();
-    }
-    this->show();
-    */
 }
 
 /**

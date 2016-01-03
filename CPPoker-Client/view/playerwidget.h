@@ -12,7 +12,10 @@ using namespace std;
 class PlayerWidget : public QWidget{
 
 private:
-    QLabel * imgPlayer;
+    QWidget * widgetCardsPlayer;
+    QHBoxLayout * layoutCardsPlayer;
+    QLabel * card1;
+    QLabel * card2;
     QLabel * labelNamePlayer;
     QVBoxLayout * layoutPlayerWidget;
     float money;

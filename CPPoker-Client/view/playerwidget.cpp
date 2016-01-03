@@ -13,10 +13,19 @@ PlayerWidget::PlayerWidget(QWidget *parent, QString name, float money) : QWidget
     QPixmap imgDealer(":/img/dealer.png");
     QPixmap imgSmallBlind(":/img/smallblind.png");
     QPixmap imgBigBlind(":/img/bigblind.png");
-    this->imgPlayer = new QLabel();
-    this->imgPlayer->resize(65, 100);
-    this->imgPlayer->setPixmap(imgUser.scaled(100,100,Qt::KeepAspectRatio));
-    this->imgPlayer->setAlignment(Qt::AlignCenter);
+
+    //this->imgPlayer = new QLabel();
+    //this->imgPlayer->resize(65, 100);
+    //this->imgPlayer->setPixmap(imgUser.scaled(100,100,Qt::KeepAspectRatio));
+    //this->imgPlayer->setAlignment(Qt::AlignCenter);
+    this->widgetCardsPlayer = new QWidget();
+    this->layoutCardsPlayer = new QHBoxLayout();
+    this->layoutCardsPlayer->setAlignment(Qt::AlignCenter);
+    this->widgetCardsPlayer->setLayout(this->layoutCardsPlayer);
+    this->card1 = new QLabel("card1");
+    this->card2 = new QLabel("card2");
+    this->layoutCardsPlayer->addWidget(this->card1);
+    this->layoutCardsPlayer->addWidget(this->card2);
 
     this->labelNamePlayer = new QLabel(name);
     this->labelNamePlayer->setAlignment(Qt::AlignCenter);
@@ -24,7 +33,7 @@ PlayerWidget::PlayerWidget(QWidget *parent, QString name, float money) : QWidget
     this->labelMoney = new QLabel(QString::number(money) + " €");
     this->labelMoney->setAlignment(Qt::AlignCenter);
 
-    this->layoutPlayerWidget->addWidget(this->imgPlayer);
+    this->layoutPlayerWidget->addWidget(this->widgetCardsPlayer);
     this->layoutPlayerWidget->addWidget(this->labelNamePlayer);
     this->layoutPlayerWidget->addWidget(this->labelMoney);
 
@@ -59,7 +68,8 @@ PlayerWidget::PlayerWidget(QWidget *parent, QString name, float money) : QWidget
 PlayerWidget::~PlayerWidget()
 {
     delete this->labelNamePlayer;
-    delete this->imgPlayer;
+    delete this->layoutCardsPlayer;
+    delete this->widgetCardsPlayer;
     delete this->layoutPlayerWidget;
     delete this->labelMoney;
     delete this->layoutPions;
