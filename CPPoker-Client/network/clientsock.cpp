@@ -25,8 +25,10 @@ void ClientSock::read()
     QString s(m_sock->readAll());
     QStringList requests = s.split(rex, QString::SkipEmptyParts);
     for(QString req : requests)
+    {
+        qDebug() << "Request received : " << req;
         m_requests.insert(m_requests.begin(), req);
-
+    }
     manageRequest();
 }
 
@@ -36,7 +38,6 @@ void ClientSock::manageRequest()
     {
         QString req = m_requests.back();
         m_requests.pop_back();
-        qDebug() << req;
         Request* request = new Request(req.toStdString());
         switch (request->getCommand()) {
         case LOGIN:
@@ -107,6 +108,7 @@ void ClientSock::disconnected()
 void ClientSock::write(Request req)
 {
     std::string s = req.toString();
+    s += "|";
     qDebug() << "Write : " << QString::fromStdString(s);
     if(m_sock->isWritable())
         m_sock->write(s.c_str(), s.length());
