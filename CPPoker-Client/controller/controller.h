@@ -77,7 +77,7 @@ public:
 
     void askRooms();
 
-    void joinRoom(std::string name);
+    void joinRoom(QString name);
 
     void displayRooms(std::map<std::string, std::string> rooms);
 

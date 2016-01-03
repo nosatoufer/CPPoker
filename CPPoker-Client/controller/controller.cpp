@@ -114,13 +114,13 @@ void Controller::askRooms() {
     }
 }
 
-void Controller::joinRoom(string name)
+void Controller::joinRoom(QString name)
 {
     if(socket != NULL)
     {
         Request req = Request();
         req.setCommand(ROOM_JOIN);
-        req.set("rName", name);
+        req.set("rName", name.toStdString());
         socket->write(req);
     }
 }

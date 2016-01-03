@@ -34,15 +34,14 @@ MenuChooseRoom::~MenuChooseRoom()
 }
 
 void MenuChooseRoom::slotConnexion(){
-    /*
-    if(ui->tableRooms->selectedItems().size() == 1){
-        QMessageBox::warning(this, ui->tableRooms->selectedItems()[0]->text(), ui->tableRooms->selectedItems()[0]->text());
-        this->indexRoom = ui->tableRooms->selectedItems()[0]->text().toInt();
+    if(ui->tableRooms->selectedItems().size() == 1) {
+        QString name = ui->tableRooms->selectedItems()[0]->text();
+        QRegExp rx("[ ]");
+        QStringList list = name.split(rx, QString::SkipEmptyParts);
+        QMessageBox::warning(this, "Joindre table", list.at(0));
+        controller->joinRoom(list.at(0));
         this->close();
     }
-    TODO : GERER LA CONNEXION A LA TABLE
-    controller->joinRoom(TABLE_NAME);
-    */
 }
 
 void MenuChooseRoom::slotAnnuler(){

@@ -42,6 +42,7 @@ void ClientSock::read()
                 this->write(request->toString());
             }
         break;
+
         case ROOM_LIST:
             qDebug() << "ROOM_LIST";
             if (request->getStatus() == Request::STATUS_FAILURE) {
@@ -50,6 +51,12 @@ void ClientSock::read()
                 qDebug() << "Call display rooms";
                 this->controller->displayRooms(request->getMap("rooms"));
             }
+        break;
+
+        case ROOM_CREATE:
+            qDebug() << "ROOM_CREATE";
+            //if (request->getStatus() == Request::STATUS_FAILURE) {
+                //this->controller->errorCreateRoom();
         break;
 
         default:
