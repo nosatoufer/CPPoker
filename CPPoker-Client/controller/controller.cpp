@@ -86,9 +86,9 @@ bool Controller::isConnected()
     }
 }
 
-void Controller::playerCard(std::pair<QString, QString> cards)
+void Controller::playerCard(QString pName, std::pair<QString, QString> cards)
 {
-    m_view->giveCards(cards);
+    m_view->giveCards(pName, cards);
 }
 
 void Controller::showTableCard(QString card)

@@ -79,19 +79,13 @@ PlayerWidget::~PlayerWidget()
     delete this->widgetPions;
 }
 
-/**
- * @brief PlayerWidget::getNamePlayer Accesseur du contenu du QLabel contenant le nom du joueur
- * @return Nom du joueur
- */
+
 string PlayerWidget::getNamePlayer()
 {
     return this->labelNamePlayer->text().toStdString();
 }
 
-/**
- * @brief PlayerWidget::setNamePlayer Mutateur du contenu du QLabel contenant le nom du joueur
- * @param newNamePlayer
- */
+
 void PlayerWidget::setNamePlayer(string newNamePlayer)
 {
     this->labelNamePlayer->setText(QString::fromStdString(newNamePlayer));

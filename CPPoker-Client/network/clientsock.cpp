@@ -86,7 +86,7 @@ void ClientSock::manageRequest()
             std::pair<QString,QString> cards;
             cards.first = QString(request->get("cardOne").c_str());
             cards.second = QString(request->get("cardTwo").c_str());
-            m_controller->playerCard(cards);
+            m_controller->playerCard(QString(request->get("pName").c_str()),cards);
             break;
         }
         case POKER_SHOW_CARD_TABLE:

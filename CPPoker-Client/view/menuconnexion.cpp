@@ -3,10 +3,7 @@
 
 #include <QMessageBox>
 
-/**
- * @brief MenuConnexion::MenuConnexion Constructeur de la fenêtre de connexion
- * @param parent
- */
+
 MenuConnexion::MenuConnexion(Controller* controller, QWidget *parent) :
     controller(controller),
     ui(new Ui::MenuConnexion),
@@ -22,17 +19,13 @@ MenuConnexion::MenuConnexion(Controller* controller, QWidget *parent) :
     connect(ui->buttonConnexion, SIGNAL(clicked()), this, SLOT(slotConnexion()));
 }
 
-/**
- * @brief MenuConnexion::~MenuConnexion Destructeur de la fenêtre de connexion
- */
+
 MenuConnexion::~MenuConnexion()
 {
     delete ui;
 }
 
-/**
- * @brief MenuConnexion::slotConnexion slot du bouton "Connexion"
- */
+
 void MenuConnexion::slotConnexion()
 {
     //Vérification si les champs ne sont pas vide
@@ -97,36 +90,24 @@ void MenuConnexion::slotConnexion()
     else
         QMessageBox::warning(this, tr("Connexion échouée !"), tr("Impossible de se connecter !"));}
 
-/**
- * @brief MenuConnexion::slotAnnuler Slot du bouton "Annuler"
- */
+
 void MenuConnexion::slotAnnuler()
 {
     this->close();
 }
 
-/**
- * @brief MenuConnexion::getPlayerName Accesseur du nom du joueur
- * @return Nom du joueur
- */
+
 QString MenuConnexion::getPlayerName()
 {
     return this->playerName;
 }
 
-/**
- * @brief MenuConnexion::getAddressIP Accesseur de l'adresse IP du serveur
- * @return Adresse IP du serveur
- */
 QString MenuConnexion::getAddressIP()
 {
     return this->addressIP;
 }
 
-/**
- * @brief MenuConnexion::getPort Accesseur du port
- * @return Port
- */
+
 int MenuConnexion::getPort()
 {
     return this->port;

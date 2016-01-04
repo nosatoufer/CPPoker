@@ -1,9 +1,6 @@
 #include "pokerwidget.h"
 #include <QDebug>
 
-/**
- * @brief PokerWidget::PokerWidget Constructeur du widget représentant la table de poker
- */
 PokerWidget::PokerWidget() : QWidget()
 {
     //Couleur de fond
@@ -29,32 +26,8 @@ PokerWidget::PokerWidget() : QWidget()
     this->buttonBet->resize(100, 30);
     this->buttonBet->move(510, 550);
 
-    /*
-    //Exemple de gestion des cartes
-    this->deleteAllCards();
-    this->addCard(":/img/cards/CLUBS/TWO.png");
-    this->addCard(":/img/cards/CLUBS/TWO.png");
-    this->addCard(":/img/cards/CLUBS/TWO.png");
-    this->addCard(":/img/cards/CLUBS/TWO.png");
-    this->addCard(":/img/cards/CLUBS/TWO.png");
-
-    this->addPlayer("joueur1",0.1);
-    this->addPlayer("joueur2",0.);
-    this->addPlayer("joueur3",200.);
-    this->addPlayer("joueur4",0.);
-    this->addPlayer("joueur5",0.);
-    this->addPlayer("joueur6",0.);
-
-    this->getPlayerWidget(0)->setVisiblePionDealer(true);
-    this->getPlayerWidget(1)->setVisiblePionSmallBlind(true);
-    this->getPlayerWidget(2)->setVisiblePionBigBlind(true);
-    */
-
 }
 
-/**
- * @brief PokerWidget::~PokerWidget Destructeur du widget
- */
 PokerWidget::~PokerWidget(){
     delete this->buttonFold;
     delete this->buttonAllIn;
@@ -64,37 +37,22 @@ PokerWidget::~PokerWidget(){
     this->deleteAllPlayers();
 }
 
-/**
- * @brief PokerWidget::getButtonRaise Accesseur du bouton "Bet"
- * @return Bouton "Raise"
- */
+
 QPushButton * PokerWidget::getButtonBet()
 {
     return this->buttonBet;
 }
 
-/**
- * @brief PokerWidget::getButtonCall Accesseur du bouton "Check"
- * @return Bouton "Call"
- */
 QPushButton * PokerWidget::getButtonCheck()
 {
     return this->buttonCheck;
 }
 
-/**
- * @brief PokerWidget::getButtonCheck Accesseur du bouton "AllIn"
- * @return Bouton "Check"
- */
 QPushButton * PokerWidget::getButtonAllIn()
 {
     return this->buttonAllIn;
 }
 
-/**
- * @brief PokerWidget::getButtonFold Accesseur du bouton "Fold"
- * @return Bouton "Fold"
- */
 QPushButton * PokerWidget::getButtonFold()
 {
     return this->buttonFold;
@@ -105,10 +63,6 @@ void PokerWidget::giveCard(QString card)
     //playerWidget.at(0)->
 }
 
-/**
- * @brief PokerWidget::addCard Méthode permettant d'ajouter une carte dans le widget
- * @param pathCardFile Chemin de l'image de la carte
- */
 void PokerWidget::addCard(QString card)
 {
     qDebug() << card;

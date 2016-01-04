@@ -18,10 +18,20 @@ class MenuCreateRoom : public QDialog
 public:
     explicit MenuCreateRoom(Controller* controller, QWidget *parent = 0);
     ~MenuCreateRoom();
+    /**
+     * @brief getRoomName returns the room's name
+     * @return the room's name
+     */
     string getRoomName();
 
 private slots:
+    /**
+     * @brief slotCreate tries to create a room
+     */
     void slotCreate();
+    /**
+     * @brief slotAnnuler cancels the room creation
+     */
     void slotAnnuler();
 
 private:

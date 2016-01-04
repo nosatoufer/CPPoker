@@ -76,7 +76,7 @@ public:
      * @brief playerCard gives to the view the pair of cards in the player's and
      * @param cards the two cards in the player's hand
      */
-    void playerCard(std::pair<QString, QString> cards);
+    void playerCard(QString pName, std::pair<QString, QString> cards);
 
     /**
      * @brief showTableCard shows the next card to display on the table

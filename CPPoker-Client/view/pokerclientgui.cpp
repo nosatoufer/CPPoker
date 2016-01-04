@@ -7,10 +7,6 @@
 #include <QDebug>
 
 
-/**
- * @brief PokerClientGui::PokerClientGui Constructeur de la fenêtre principale
- * @param parent
- */
 PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PokerClientGui),
@@ -36,9 +32,6 @@ PokerClientGui::PokerClientGui(Controller* controller, QWidget *parent) :
     menuCo.exec();
 }
 
-/**
- * @brief PokerClientGui::~PokerClientGui Destructeur de la fenêtre principale
- */
 PokerClientGui::~PokerClientGui()
 {
     //Suppresion du widget représentant la table de poker
@@ -94,7 +87,7 @@ void PokerClientGui::remPlayer(QString player)
     m_players.removeOne(player);
 }
 
-void PokerClientGui::giveCards(std::pair<QString,QString> card)
+void PokerClientGui::giveCards(QString pName, std::pair<QString,QString> card)
 {
     /*
     int i = 0;
@@ -131,9 +124,6 @@ void PokerClientGui::check()
     m_controller->check();
 }
 
-/**
- * @brief PokerClientGui::slotQuitter Slot du bouton "Quitter"
- */
 void PokerClientGui::slotQuitter()
 {
     if(this->m_isConnected){
