@@ -2,10 +2,10 @@
 
 ClientSock::ClientSock(QString ip, int port, QString nickname, Controller* controller, QObject *parent) :
     QObject(parent),
-    controller(controller),
+    m_controller(controller),
     m_requests(),
-    nickname(nickname.toStdString()),
-    identified(false)
+    m_nickname(nickname.toStdString()),
+    m_identified(false)
 {
     m_sock = new QTcpSocket();
     connect(m_sock, SIGNAL(connected()), this, SLOT(connected()));
@@ -44,12 +44,12 @@ void ClientSock::manageRequest()
             if (request->isSet(Request::STATUS)) {
                 if (request->getStatus() == Request::STATUS_FAILURE) {
                     qDebug() << "LOGIN_3";
-                    controller->nicknameUsed();
-                    identified = false;
+                    m_controller->nicknameUsed();
+                    m_identified = false;
                 } else {
                     qDebug() << "LOGIN_2";
-                    controller->nicknameAvailable();
-                    identified = true;
+                    m_controller->nicknameAvailable();
+                    m_identified = true;
                 }
             } else {
                 qDebug() << "LOGIN_1";
@@ -64,7 +64,7 @@ void ClientSock::manageRequest()
                 // A gérer
             } else {
                 qDebug() << "Call display rooms";
-                this->controller->displayRooms(request->getMap("rooms"));
+                this->m_controller->displayRooms(request->getMap("rooms"));
             }
             break;
 
@@ -75,10 +75,10 @@ void ClientSock::manageRequest()
             break;
 
         case GAME_START:
-            controller->gameStarted();
+            m_controller->gameStarted();
             break;
         case PLAYER_JOINED:
-            controller->addPlayer(QString(request->get("pName").c_str()));
+            m_controller->addPlayer(QString(request->get("pName").c_str()));
             break;
 
         case POKER_GIVE_CARD:
@@ -86,11 +86,11 @@ void ClientSock::manageRequest()
             std::pair<QString,QString> cards;
             cards.first = QString(request->get("cardOne").c_str());
             cards.second = QString(request->get("cardTwo").c_str());
-            controller->playerCard(cards);
+            m_controller->playerCard(cards);
             break;
         }
         case POKER_SHOW_CARD_TABLE:
-            controller->showTableCard(QString(request->get("card").c_str()));
+            m_controller->showTableCard(QString(request->get("card").c_str()));
             break;
         default:
             qDebug() << "Unknown command";
@@ -119,13 +119,7 @@ bool ClientSock::hasRequests()
     return m_requests.size() != 0;
 }
 
-Request* ClientSock::getRequest()
-{
 
-    //Request * c = m_requests.back();
-    //m_requests.pop_back();
-    //return c;
-}
 
 bool ClientSock::isConnected()
 {
@@ -135,9 +129,9 @@ bool ClientSock::isConnected()
 
 bool ClientSock::isIdentified()
 {
-    return identified;
+    return m_identified;
 }
 
 std::string ClientSock::getNickname() {
-    return this->nickname;
+    return this->m_nickname;
 }

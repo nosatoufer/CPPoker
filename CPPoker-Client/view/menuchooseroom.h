@@ -2,6 +2,7 @@
 #define MENUCHOOSEROOM_H
 
 #include <QDialog>
+#include <QVector>
 #include <QStandardItemModel>
 #include <QMessageBox>
 #include "../controller/controller.h"
@@ -18,7 +19,7 @@ class MenuChooseRoom : public QDialog
     Q_OBJECT
 
 public:
-    explicit MenuChooseRoom(std::map<std::string, std::string> rooms, Controller* controller, QWidget *parent = 0);
+    explicit MenuChooseRoom(std::map<std::string, std::string> rooms, Controller* m_controller, QWidget *parent = 0);
     ~MenuChooseRoom();
     string getNameRoom();
 
@@ -29,9 +30,9 @@ private slots:
 
 private:
     Ui::MenuChooseRoom *ui;
-    string indexRoom = "";
-    Controller* controller;
-    std::vector<std::string> roomsName;
+    string m_indexRoom = "";
+    Controller* m_controller;
+    QVector<std::string> m_roomsName;
 };
 
 #endif // MENUCHOOSEROOM_H

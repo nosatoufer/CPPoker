@@ -94,7 +94,7 @@ void PokerClientGui::remPlayer(QString player)
     m_players.removeOne(player);
 }
 
-void PokerClientGui::giveCards(QString card)
+void PokerClientGui::giveCards(std::pair<QString,QString> card)
 {
     /*
     int i = 0;

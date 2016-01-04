@@ -31,7 +31,7 @@ public:
 
     void addPlayer(QString player);
     void remPlayer(QString player);
-    void giveCards(QString card);
+    void giveCards(std::pair<QString, QString> card);
     void showTableCard(QString card);
 
 public slots:

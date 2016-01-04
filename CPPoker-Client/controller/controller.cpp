@@ -4,83 +4,83 @@
 #include <QDebug>
 
 Controller::Controller() :
-    socket(NULL),
-    view(NULL)
+    m_socket(NULL),
+    m_view(NULL)
 {}
 
 Controller::~Controller()
 {}
 
 void Controller::attachView(PokerClientGui* view) {
-    this->view = view;
+    this->m_view = view;
 }
 
-void Controller::attachModel(ClientSock* socket) {
-    this->socket = socket;
+void Controller::attachSocket(ClientSock* socket) {
+    this->m_socket = socket;
 }
 
 void Controller::askNickname(QString nickname)
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(LOGIN);
         req.set("nickname",nickname.toStdString());
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 void Controller::fold()
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(POKER_FOLD);
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::allIn()
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(POKER_ALL_IN);
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::check()
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(POKER_CHECK);
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::bet(int value)
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(POKER_BET);
         req.set("bet", std::to_string(value));
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 bool Controller::connectTo(QString ip, int port, QString nickname)
 {
     qDebug() << "connectTo()";
-    socket = new ClientSock(ip, port, nickname, this);
-    return socket->isConnected();
+    m_socket = new ClientSock(ip, port, nickname, this);
+    return m_socket->isConnected();
 }
 
 bool Controller::isConnected()
 {
-    if (this->socket != NULL) {
-        return this->socket->isConnected();
+    if (this->m_socket != NULL) {
+        return this->m_socket->isConnected();
     } else {
         return false;
     }
@@ -88,8 +88,7 @@ bool Controller::isConnected()
 
 void Controller::playerCard(std::pair<QString, QString> cards)
 {
-    view->giveCards(cards.first);
-    view->giveCards(cards.second);
+    m_view->giveCards(cards);
 }
 
 void Controller::showTableCard(QString card)
@@ -99,55 +98,55 @@ void Controller::showTableCard(QString card)
 
 bool Controller::isIdentified()
 {
-    if (this->socket != NULL) {
-        return this->socket->isIdentified();
+    if (this->m_socket != NULL) {
+        return this->m_socket->isIdentified();
     } else {
         return false;
     }
 }
 
 void Controller::askRooms() {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(ROOM_LIST);
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::joinRoom(QString name)
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(ROOM_JOIN);
         req.set("rName", name.toStdString());
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::displayRooms(std::map<std::string, std::string> rooms) {
     qDebug() << "Call display rooms²";
-    this->view->displayRooms(rooms);
+    this->m_view->displayRooms(rooms);
 }
 
 void Controller::nicknameUsed()
 {
-    this->view->displayErrorMessage(QString::fromStdString("Pseudo déjà utilisé, connexion impossible"));
-    delete socket;
-    socket = NULL;
+    this->m_view->displayErrorMessage(QString::fromStdString("Pseudo déjà utilisé, connexion impossible"));
+    delete m_socket;
+    m_socket = NULL;
 }
 
 void Controller::nicknameAvailable()
 {
-    this->view->displaySuccessMessage(QString::fromStdString("Connexion réussie !"));
+    this->m_view->displaySuccessMessage(QString::fromStdString("Connexion réussie !"));
     this->askRooms();
 }
 
 void Controller::createRoom(std::string name, unsigned int minPlayer,
                             unsigned int maxPlayer, unsigned int smallBlind, unsigned int bigBlind)
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(ROOM_CREATE);
@@ -156,26 +155,26 @@ void Controller::createRoom(std::string name, unsigned int minPlayer,
         req.set("maxPlayer", std::to_string(maxPlayer));
         req.set("smallBlind", std::to_string(smallBlind));
         req.set("bigBlind", std::to_string(bigBlind));
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::startGame()
 {
-    if(socket != NULL)
+    if(m_socket != NULL)
     {
         Request req = Request();
         req.setCommand(GAME_START);
-        socket->write(req);
+        m_socket->write(req);
     }
 }
 
 void Controller::gameStarted()
 {
-    view->startGame();
+    m_view->startGame();
 }
 
 void Controller::addPlayer(QString pName)
 {
-    view->addPlayer(pName);
+    m_view->addPlayer(pName);
 }

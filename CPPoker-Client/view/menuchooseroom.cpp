@@ -4,8 +4,8 @@
 MenuChooseRoom::MenuChooseRoom(std::map<std::string, std::string> rooms, Controller* controller, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MenuChooseRoom),
-    roomsName(),
-    controller(controller)
+    m_roomsName(),
+    m_controller(controller)
 {
     //qDebug() << "MenuChooseRoom";
     ui->setupUi(this);
@@ -18,7 +18,7 @@ MenuChooseRoom::MenuChooseRoom(std::map<std::string, std::string> rooms, Control
             ui->tableRooms->addItem(QString::fromStdString(temp.at("name")
                                     + " - (" + temp.at("currentPlayer") + "/" + temp.at("maxPlayer") + ") "
                                     + " - (" + temp.at("smallBlind") + "/" + temp.at("bigBlind") + ")"));
-            roomsName.push_back(temp.at("name"));
+            m_roomsName.push_back(temp.at("name"));
         }
     }
     //qDebug() << "MenuChooseRoom 3";
@@ -40,7 +40,7 @@ void MenuChooseRoom::slotConnexion(){
         QRegExp rx("[ ]");
         QStringList list = name.split(rx, QString::SkipEmptyParts);
         //QMessageBox::warning(this, "Joindre table", list.at(0));
-        controller->joinRoom(list.at(0));
+        m_controller->joinRoom(list.at(0));
         this->close();
     }
 }
@@ -54,5 +54,5 @@ void MenuChooseRoom::slotCreateTable(){
 }
 
 string MenuChooseRoom::getNameRoom(){
-    return this->indexRoom;
+    return this->m_indexRoom;
 }

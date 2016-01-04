@@ -14,7 +14,7 @@
  */
 class Request{
 private:
-    std::map<std::string, std::string> values;
+    std::map<std::string, std::string> m_values;
 
 public:
     static const std::string COMMAND;

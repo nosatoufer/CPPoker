@@ -9,8 +9,8 @@
  */
 MenuConnexion::MenuConnexion(Controller* controller, QWidget *parent) :
     controller(controller),
-    QDialog(parent),
-    ui(new Ui::MenuConnexion)
+    ui(new Ui::MenuConnexion),
+    QDialog(parent)
 {
     ui->setupUi(this);
 

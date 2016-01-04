@@ -9,75 +9,75 @@ const std::string Request::STATUS_FAILURE = "F";
 Request::Request() {}
 
 Request::Request(std::string s) {
-    values = jsonDecode(s);
+    m_values = jsonDecode(s);
 }
 
 Request::Request(std::map<std::string, std::string> m) :
-    values(m)
+    m_values(m)
 {}
 
 std::string& Request::operator[](std::string s){
-    return values[s];
+    return m_values[s];
 }
 
 Request::operator std::string () {
-    return jsonEncode(values);
+    return jsonEncode(m_values);
 }
 
 std::string Request::toString() {
-    return jsonEncode(values);
+    return jsonEncode(m_values);
 }
 
 bool Request::empty() {
-    return values.empty();
+    return m_values.empty();
 }
 
 bool Request::isSet(const std::string &s) {
-    return (values.find(s) != values.end());
+    return (m_values.find(s) != m_values.end());
 }
 
 Command Request::getCommand(){
-    std::string s = values[Request::COMMAND];
+    std::string s = m_values[Request::COMMAND];
     Command res = atoi(s.c_str());
     return res;
 }
 
 std::string Request::getStatus() {
-    return values[Request::STATUS];
+    return m_values[Request::STATUS];
 }
 
 std::string Request::get(std::string s) {
-    return values[s];
+    return m_values[s];
 }
 
 std::string Request::getMessage() {
-    return values[Request::MESSAGE];
+    return m_values[Request::MESSAGE];
 }
 
 std::map<std::string, std::string> Request::getMap(std::string s) {
-    return jsonDecode(values[s]);
+    return jsonDecode(m_values[s]);
 }
 
 void Request::setCommand(Command i) {
     std::ostringstream s;
     s<<i;
-    values[Request::COMMAND] = s.str();
+    m_values[Request::COMMAND] = s.str();
 }
 
 void Request::setStatus(const std::string s) {
-    values[Request::STATUS] = s;
+    m_values[Request::STATUS] = s;
 }
 
 void Request::setMessage(std::string s) {
-    values[Request::MESSAGE] = s;
+    m_values[Request::MESSAGE] = s;
 }
 
 void Request::set(std::string key, std::string value) {
-    values[key] = value;
+    m_values[key] = value;
 }
 
 void Request::setMap(std::string key, std::map<std::string,std::string> m) {
-    values[key] = jsonEncode(m);
+    m_values[key] = jsonEncode(m);
 }
 
 Request::~Request() {}
